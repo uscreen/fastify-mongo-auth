@@ -26,7 +26,7 @@ const schema = {
   }
 }
 
-module.exports = fp(async (fastify, opts, next) => {
+const fastifyMongoAuth = async (fastify, opts, next) => {
   const {
     decorateRequest: user,
     collection,
@@ -139,4 +139,13 @@ module.exports = fp(async (fastify, opts, next) => {
   fastify.decorate('auth', auth)
 
   next()
+}
+
+module.exports = fp(fastifyMongoAuth, {
+  fastify: '>=2.x',
+  name: 'fastify-mongo-auth',
+  decorators: {
+    fastify: ['httpErrors', 'crud']
+  },
+  dependencies: ['fastify-sensible', 'fastify-mongo-crud']
 })
