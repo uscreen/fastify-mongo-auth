@@ -51,7 +51,7 @@ const fastifyMongoAuth = async (fastify, opts, next) => {
   })
 
   /**
-   * verify any request with exiting session
+   * verify any request with existing session
    */
   fastify.addHook('preHandler', async (req, res) => {
     try {
