@@ -10,6 +10,7 @@ variables:
 
 stages:
   - test
+  - audit
 
 test:
   stage: test
