@@ -88,9 +88,10 @@ module.exports = async fastify => {
 
   /**
    * authentication / logout
-   * <- {}
+   * -> {} - no payload required
+   * <- {} - no payload returned
    */
-  fastify.get('/logout', auth.logoutHandler)
+  fastify.post('/logout', auth.logoutHandler)
 
   /**
    * authentication / check currentUser
@@ -121,6 +122,7 @@ module.exports = async fastify => {
 ## Roadmap
 
 - test
+- docs
 - improved dependency handling
 - improved onboarding
 - maybe add more handler (register, reset, etc.)?
