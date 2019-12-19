@@ -70,20 +70,26 @@ module.exports = fp(async (fastify, opts) => {
 })
 ```
 
-__Prepare__ account somewhere within `fastify` context:
+__Prepare__ account within a `service/accounts.js` file:
 
 ```js
-// [...]
+'use strict'
 
-async function createAccount(username, password) {
+module.exports = async fastify => {
   const { auth } = fastify
 
-  const hash = auth.createHash(password)
+  /**
+   * registration
+   * -> body.{username, password}
+   * <- account.{username, _id}
+   */
+  fastify.post('/register', req => {
+    const data = { ...req.body }
+    data.hash = await this.createHash(data.password)
+    delete data.password
 
-  return auth.collection.create({ username, hash })
+    return { account: await this.collection.create(data) }}
 }
-
-// [...]
 ```
 
 __Usage__ within a `services/auth.js` file:
@@ -131,6 +137,7 @@ module.exports = async fastify => {
 - `passwordField`: The name of the property the password is handed over when logging in. Default: `"username"`
 
 ## API
+<<<<<<< Updated upstream
 
 ### get collection()
 
@@ -144,6 +151,21 @@ PreHandler validating authentication. If autentication not valid, a `401 Unautho
 
 Creates a hash from given password. Useful when creating new a new account or changing an account's password.
 
+=======
+
+### get collection()
+
+Returns the [`fastify-mongo-crud`](https://www.npmjs.com/package/@uscreen.de/fastify-mongo-crud) collection object where the accounts are stored.
+
+### authorized(req, res, next)
+
+PreHandler validating authentication. If autentication not valid, a `401 Unauthorized` error will be thrown.
+
+### createHash(password)
+
+Creates a hash from given password. Useful when creating new a new account or changing an account's password.
+
+>>>>>>> Stashed changes
 ### verifyHash(password, hash)
 
 Verifies if the given password corresponds to the given hash.
