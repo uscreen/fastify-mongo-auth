@@ -68,7 +68,28 @@ module.exports = fp(async (fastify, opts) => {
     decorateRequest: 'account'
   })
 })
+```
 
+__Prepare__ account within a `service/accounts.js` file:
+
+```js
+'use strict'
+
+module.exports = async fastify => {
+  const { auth } = fastify
+
+  /**
+   * registration
+   * -> body.{username, password}
+   * <- account.{username, _id}
+   */
+  fastify.post('/register', req => {
+    const data = { ...req.body }
+    data.hash = await this.createHash(data.password)
+    delete data.password
+
+    return { account: await this.collection.create(data) }}
+}
 ```
 
 __Usage__ within a `services/auth.js` file:
@@ -105,17 +126,68 @@ module.exports = async fastify => {
     auth.currentUserHandler
   )
 }
-
-
 ```
 
 ## Options
 
-> TBD
+- `key`: The key [`fastify-secure-session`](https://www.npmjs.com/package/fastify-secure-session) uses to ensure secure stateless cookie sessions. Default: `""`
+- `decorateRequest`: The property each request is decorated with to contain the currently authenticated account. Default: `"user"`
+- `collection`: The name of the mongodb collection the accounts are stored in. Default: `"accounts"`
+- `usernameField`: The name of the property the username is stored in. Affects mongodb documents and the login handler (see below). Default: `"username"`
+- `passwordField`: The name of the property the password is handed over when logging in. Default: `"username"`
 
-## Api
+## API
+<<<<<<< Updated upstream
 
-> TBD
+### get collection()
+
+Returns the [`fastify-mongo-crud`](https://www.npmjs.com/package/@uscreen.de/fastify-mongo-crud) collection object where the accounts are stored.
+
+### authorized(req, res, next)
+
+PreHandler validating authentication. If autentication not valid, a `401 Unauthorized` error will be thrown.
+
+### createHash(password)
+
+Creates a hash from given password. Useful when creating new a new account or changing an account's password.
+
+=======
+
+### get collection()
+
+Returns the [`fastify-mongo-crud`](https://www.npmjs.com/package/@uscreen.de/fastify-mongo-crud) collection object where the accounts are stored.
+
+### authorized(req, res, next)
+
+PreHandler validating authentication. If autentication not valid, a `401 Unauthorized` error will be thrown.
+
+### createHash(password)
+
+Creates a hash from given password. Useful when creating new a new account or changing an account's password.
+
+>>>>>>> Stashed changes
+### verifyHash(password, hash)
+
+Verifies if the given password corresponds to the given hash.
+
+### async loginHandler(req)
+
+Handler for logging in an account (i.e. called by `POST /login`). Accepts body as following (property names may differ according to delivered `opts` when plugin was registered):
+
+```json
+{
+  "username": "a user's name",
+  "password": "a user's password"
+}
+```
+
+### async logoutHandler(req)
+
+Handler for logging out an account (i.e. called by `POST /logout`)
+
+### async currentUserHandler(req)
+
+Handler returning the currently authenticated account (i.e. called by `GET /currentUser`).
 
 ---
 
