@@ -144,19 +144,19 @@ Returns the [`fastify-mongo-crud`](https://www.npmjs.com/package/@uscreen.de/fas
 
 ### authorized(req, res, next)
 
-PreHandler validating authentication. If autentication not valid, a `401 Unauthorized` error will be thrown.
+PreHandler validating authentication. Throws an `401 Unauthorized` error on unvalid authentication.
 
 ### createHash(password)
 
-Creates a hash from given password. Useful when creating new a new account or changing an account's password.
+Creates a hash from given password. Useful when creating a new account or changing an account's password.
 
 ### verifyHash(password, hash)
 
-Verifies if the given password corresponds to the given hash.
+Verifies the given password to the given hash.
 
 ### async loginHandler(req)
 
-Handler for logging in an account (i.e. called by `POST /login`). Accepts body as following (property names may differ according to delivered `opts` when plugin was registered):
+Handler for the login to an account (i.e. called by `POST /login`). Expects a `req` object with a `body` containing credentials as configured in __Options__, defaults to:
 
 ```json
 {
@@ -167,11 +167,11 @@ Handler for logging in an account (i.e. called by `POST /login`). Accepts body a
 
 ### async logoutHandler(req)
 
-Handler for logging out an account (i.e. called by `POST /logout`)
+Handler for logging off from an account (i.e. called by `POST /logout`). Expects a `req` object without a `body`.
 
 ### async currentUserHandler(req)
 
-Handler returning the currently authenticated account (i.e. called by `GET /currentUser`).
+Handler returning the current authenticated account (i.e. called by `GET /currentUser`) or an empty object if no account is authenticated. Expects a `req` object without a `body`.
 
 ---
 
