@@ -131,11 +131,13 @@ module.exports = async fastify => {
 
 ## Options
 
-- `key`: The key [`fastify-secure-session`](https://www.npmjs.com/package/fastify-secure-session) uses to ensure secure stateless cookie sessions. Default: `""`
-- `decorateRequest`: The property each request is decorated with to contain the currently authenticated account. Default: `"user"`
-- `collection`: The name of the mongodb collection the accounts are stored in. Default: `"accounts"`
-- `usernameField`: The name of the property the username is stored in. Affects mongodb documents and the login handler (see below). Default: `"username"`
-- `passwordField`: The name of the property the password is handed over when logging in. Default: `"username"`
+| Option              | Description                                                                                                                                                   | Default      |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| __collection__      | Name of the mongodb collection the accounts are stored in.                                                                                                    | `"accounts"` |
+| __key__             | Path to file of session-key [`fastify-secure-session`](https://www.npmjs.com/package/fastify-secure-session) uses to ensure secure stateless cookie sessions. | `""`         |
+| __decorateRequest__ | Property providing current authenticated account object within request object. (ie.: `req.user` as default)                                                   | `"user"`     |
+| __usernameField__   | Name of property for usernames. Affects mongodb documents and the login handler (see below).                                                                  | `"username"` |
+| __passwordField__   | Name of property for passwords.                                                                                                                               | `"password"` |
 
 ## API
 
@@ -157,7 +159,7 @@ Verifies the given password to the given hash.
 
 ### async loginHandler(req)
 
-Handler for the login to an account (i.e. called by `POST /login`). Expects a `req` object with a `body` containing credentials as configured in __Options__, defaults to:
+Handler for logging in to an account (i.e. called by `POST /login`). Expects a `req` object with a `body` containing credentials as configured in __Options__, defaults to:
 
 ```json
 {
