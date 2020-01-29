@@ -83,12 +83,13 @@ module.exports = async fastify => {
    * -> body.{username, password}
    * <- account.{username, _id}
    */
-  fastify.post('/register', req => {
+  fastify.post('/register', async req => {
     const data = { ...req.body }
-    data.hash = await this.createHash(data.password)
+    data.hash = auth.createHash(data.password)
     delete data.password
 
-    return { account: await this.collection.create(data) }}
+    return { account: await auth.collection.create(data) }
+  })
 }
 ```
 
