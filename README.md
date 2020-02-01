@@ -50,8 +50,6 @@ module.exports = fp(async (fastify, opts) => {
    * 1) setup mongodb connection
    */
   await fastify.register(mongodb, {
-    forceClose: true,
-    useUnifiedTopology: true,
     url: opts.mongoUri
   })
 
@@ -83,13 +81,12 @@ module.exports = async fastify => {
    * -> body.{username, password}
    * <- account.{username, _id}
    */
-  fastify.post('/register', async req => {
-    const data = { ...req.body }
-    data.hash = auth.createHash(data.password)
-    delete data.password
-
-    return { account: await auth.collection.create(data) }
-  })
+  fastify.post('/register', async req => ({
+    account: await auth.collection.create({
+      hash: auth.createHash(req.body.password),
+      username: req.body.username.toLowerCase()
+    })
+  }))
 }
 ```
 
@@ -131,13 +128,14 @@ module.exports = async fastify => {
 
 ## Options
 
-| Option              | Description                                                                                                                                                   | Default      |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
-| __collection__      | Name of the mongodb collection the accounts are stored in.                                                                                                    | `"accounts"` |
-| __key__             | Path to file of session-key [`fastify-secure-session`](https://www.npmjs.com/package/fastify-secure-session) uses to ensure secure stateless cookie sessions. | `""`         |
-| __decorateRequest__ | Property providing current authenticated account object within request object. (ie.: `req.user` as default)                                                   | `"user"`     |
-| __usernameField__   | Name of property for usernames. Affects mongodb documents and the login handler (see below).                                                                  | `"username"` |
-| __passwordField__   | Name of property for passwords.                                                                                                                               | `"password"` |
+| Option                  | Description                                                                                                                                                   | Default      |
+|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+| __collection__          | Name of the mongodb collection the accounts are stored in.                                                                                                    | `"accounts"` |
+| __key__                 | Path to file of session-key [`fastify-secure-session`](https://www.npmjs.com/package/fastify-secure-session) uses to ensure secure stateless cookie sessions. | `""`         |
+| __decorateRequest__     | Property providing current authenticated account object within request object. (ie.: `req.user` as default)                                                   | `"user"`     |
+| __usernameToLowerCase__ | Should usernames be treated case-insensitive (by lower-casing all queries) or not.                                                                            | `true`       |
+| __usernameField__       | Name of property for usernames. Affects mongodb documents and the login handler (see below).                                                                  | `"username"` |
+| __passwordField__       | Name of property for passwords.                                                                                                                               | `"password"` |
 
 ## API
 
@@ -189,7 +187,16 @@ Handler returning the current authenticated account (i.e. called by `GET /curren
 
 ## Changelog
 
-> TBD
+### v0.1.0
+
+#### Changed
+
+- uses lower case usernames by default
+- preHandler stops logging empty session as error
+
+#### Added
+
+- new option `usernameToLowerCase` to disable case-insensitive usernames (defaults to true)
 
 ### v0.0.0
 
