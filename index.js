@@ -47,12 +47,14 @@ const fastifyMongoAuth = async (fastify, opts, next) => {
   /**
    * session config
    */
-  fastify.register(session, {
-    key: opts.key,
-    cookie: {
-      path: '/'
-    }
-  })
+  if (!fastify.hasRequestDecorator('session')) {
+    fastify.register(session, {
+      key: opts.key,
+      cookie: {
+        path: '/'
+      }
+    })
+  }
 
   /**
    * verify any request with existing session
