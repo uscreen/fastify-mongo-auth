@@ -128,14 +128,15 @@ module.exports = async fastify => {
 
 ## Options
 
-| Option                  | Description                                                                                                                                                   | Default      |
-|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
-| __collection__          | Name of the mongodb collection the accounts are stored in.                                                                                                    | `"accounts"` |
-| __key__                 | Path to file of session-key [`fastify-secure-session`](https://www.npmjs.com/package/fastify-secure-session) uses to ensure secure stateless cookie sessions. | `""`         |
-| __decorateRequest__     | Property providing current authenticated account object within request object. (ie.: `req.user` as default)                                                   | `"user"`     |
-| __usernameToLowerCase__ | Should usernames be treated case-insensitive (by lower-casing all queries) or not.                                                                            | `true`       |
-| __usernameField__       | Name of property for usernames. Affects mongodb documents and the login handler (see below).                                                                  | `"username"` |
-| __passwordField__       | Name of property for passwords.                                                                                                                               | `"password"` |
+| Option                  | Description                                                                                                                                                   | Default         |
+|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
+| __collection__          | Name of the mongodb collection the accounts are stored in.                                                                                                    | `"accounts"`    |
+| __cookie__              | Options for session cookie as listed here [`cookie`](https://github.com/jshttp/cookie#readme).                                                                | `{ path: '/' }` |
+| __key__                 | Path to file of session-key [`fastify-secure-session`](https://www.npmjs.com/package/fastify-secure-session) uses to ensure secure stateless cookie sessions. | `""`            |
+| __decorateRequest__     | Property providing current authenticated account object within request object. (ie.: `req.user` as default)                                                   | `"user"`        |
+| __usernameToLowerCase__ | Should usernames be treated case-insensitive (by lower-casing all queries) or not.                                                                            | `true`          |
+| __usernameField__       | Name of property for usernames. Affects mongodb documents and the login handler (see below).                                                                  | `"username"`    |
+| __passwordField__       | Name of property for passwords.                                                                                                                               | `"password"`    |
 
 ## API
 
@@ -186,6 +187,12 @@ Handler returning the current authenticated account (i.e. called by `GET /curren
 - maybe add routes?
 
 ## Changelog
+
+### v0.2.0
+
+#### Added
+
+- cookie options (see [`cookie`](https://github.com/jshttp/cookie#readme) defaults to `{ path: '/' }`
 
 ### v0.1.0
 
