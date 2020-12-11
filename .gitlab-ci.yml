@@ -19,6 +19,7 @@ test:
   services:
     - mongo:latest
   script:
+    - apk add --no-cache libtool
     - yarn install --pure-lockfile --cache-folder .yarn
     - yarn test:ci
   coverage: '/^Statements\s*:\s*([^%]+)/'
