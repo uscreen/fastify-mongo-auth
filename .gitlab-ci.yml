@@ -1,9 +1,9 @@
 image: node:lts-alpine
 
-cache:
-  paths:
-    - node_modules/
-    - .yarn
+# cache:
+#   paths:
+#     - node_modules/
+#     - .yarn
 
 variables:
   mongoServer: "mongo:27017"
@@ -19,7 +19,7 @@ test:
   services:
     - mongo:latest
   script:
-    - apk add --no-cache build-base python3
+    - apk add --no-cache alpine-sdk python3
     - yarn install --pure-lockfile --cache-folder .yarn
     - yarn test:ci
   coverage: '/^Statements\s*:\s*([^%]+)/'
