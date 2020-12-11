@@ -117,7 +117,7 @@ const fastifyMongoAuth = async (fastify, opts, next) => {
       query[usernameField] = usernameToLowerCase
         ? req.body[usernameField].toLowerCase()
         : req.body[usernameField]
-      const account = await auth.collection.findOne(query).catch(e => {
+      const account = await auth.collection.findOne(query).catch((e) => {
         fastify.log.error(e)
       })
       if (account && auth.verifyHash(req.body[passwordField], account.hash)) {
