@@ -1,9 +1,9 @@
 image: node:lts-alpine
 
-# cache:
-#   paths:
-#     - node_modules/
-#     - .yarn
+cache:
+  paths:
+    - node_modules/
+    - .yarn
 
 variables:
   mongoServer: "mongo:27017"
