@@ -20,6 +20,8 @@ test:
     - mongo:latest
   script:
     - apk add --no-cache build-base python3 libtool autoconf automake
+      # npm private token
+    - npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
     - yarn install --pure-lockfile --cache-folder .yarn
     - yarn test:ci
   coverage: '/^Statements\s*:\s*([^%]+)/'
