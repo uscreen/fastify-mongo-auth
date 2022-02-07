@@ -3,7 +3,7 @@ const { build } = require('./helper')
 
 tap.test('fastify-mongo-auth: workflow', async (t) => {
   const fastify = await build(t, {})
-  let validCookie = null
+  let currentCookie = null
   t.test(
     'should prohibit access to protected route on unauthorized request',
     async (t) => {
@@ -45,21 +45,20 @@ tap.test('fastify-mongo-auth: workflow', async (t) => {
       })
 
       t.equal(200, statusCode, 'should equal 200')
-      validCookie = cookies.find((c) => c.name === 'session')
-      t.ok(validCookie, 'delivered correct cookie')
+      currentCookie = cookies.find((c) => c.name === 'session')
+      t.ok(currentCookie, 'delivered correct cookie')
     } catch (err) {}
     t.end()
   })
 
   t.test('should allow access on authenticated user', async (t) => {
-    const cookies = {
-      [validCookie.name]: validCookie.value
-    }
     try {
       const { statusCode } = await fastify.inject({
         method: 'GET',
         url: '/currentUser',
-        cookies
+        cookies: {
+          [currentCookie.name]: currentCookie.value
+        }
       })
       t.equal(200, statusCode, 'should equal 200')
     } catch (err) {}
@@ -67,21 +66,20 @@ tap.test('fastify-mongo-auth: workflow', async (t) => {
   })
 
   t.test('should log out authenticated user', async (t) => {
-    const validCookies = {
-      [validCookie.name]: validCookie.value
-    }
     try {
       const { statusCode, cookies } = await fastify.inject({
         method: 'POST',
         url: '/logout',
-        cookies: validCookies
+        cookies: {
+          [currentCookie.name]: currentCookie.value
+        }
       })
-      const deletedCookie = cookies.find((c) => c.name === 'session')
+      currentCookie = cookies.find((c) => c.name === 'session')
       t.equal(200, statusCode, 'should equal 200')
-      t.ok(deletedCookie, 'deliver adjusted cookie')
-      t.equal(deletedCookie.value, '', 'deliver empty cookie value')
+      t.ok(currentCookie, 'deliver adjusted cookie')
+      t.equal(currentCookie.value, '', 'deliver empty cookie value')
       t.equal(
-        new Date(deletedCookie.expires).getTime(),
+        new Date(currentCookie.expires).getTime(),
         0,
         'reset expiration date'
       )
@@ -95,7 +93,10 @@ tap.test('fastify-mongo-auth: workflow', async (t) => {
       try {
         const { statusCode } = await fastify.inject({
           method: 'GET',
-          url: '/currentUser'
+          url: '/currentUser',
+          cookies: {
+            [currentCookie.name]: currentCookie.value
+          }
         })
         t.equal(401, statusCode, 'should equal 401')
       } catch (err) {}
@@ -126,7 +127,6 @@ tap.test('fastify-mongo-auth: edges', async (t) => {
     usernameToLowerCase: false,
     addSessionDecorator: true
   })
-  let validCookie = null
   t.test('should register a valid new user', async (t) => {
     try {
       const { statusCode } = await fastify.inject({
@@ -169,8 +169,8 @@ tap.test('fastify-mongo-auth: edges', async (t) => {
       })
 
       t.equal(200, statusCode, 'should equal 200')
-      validCookie = cookies.find((c) => c.name === 'session')
-      t.ok(validCookie, 'delivered correct cookie')
+      const currentCookie = cookies.find((c) => c.name === 'session')
+      t.ok(currentCookie, 'delivered correct cookie')
     } catch (err) {}
     t.end()
   })
