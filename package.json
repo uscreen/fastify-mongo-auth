@@ -16,7 +16,7 @@
     "@uscreen.de/dev-service": "^0.11.7",
     "@uscreen.de/eslint-config-prettystandard-node": "^0.2.2",
     "@uscreen.de/fastify-mongo-crud": "^0.4.4",
-    "eslint": "^8.8.0",
+    "eslint": "^8.14.0",
     "fastify": "^3.27.1",
     "fastify-mongodb": "^3.0.0",
     "fastify-sensible": "^3.1.2",
