@@ -1,9 +1,9 @@
 'use strict'
 
-const envSchema = require('env-schema')
-const fp = require('fastify-plugin')
-const session = require('fastify-secure-session')
-const securePassword = require('secure-password')
+import envSchema from 'env-schema'
+import fp from 'fastify-plugin'
+import session from 'fastify-secure-session'
+import securePassword from 'secure-password'
 const pwd = securePassword()
 
 const schema = {
@@ -154,7 +154,7 @@ const fastifyMongoAuth = async (fastify, opts, next) => {
   next()
 }
 
-module.exports = fp(fastifyMongoAuth, {
+export default fp(fastifyMongoAuth, {
   fastify: '>=2.x',
   name: 'fastify-mongo-auth',
   decorators: {

@@ -35,17 +35,17 @@ __Setup__ within a `plugins/mongo.js` file to resolve required dependencies befo
 ```js
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
-const fp = require('fastify-plugin')
-const mongodb = require('fastify-mongodb')
-const crud = require('@uscreen.de/fastify-mongo-crud')
-const auth = require('@uscreen.de/fastify-mongo-auth')
+import fs from 'fs'
+import path from 'path'
+import fp from 'fastify-plugin'
+import mongodb from 'fastify-mongodb'
+import crud from '@uscreen.de/fastify-mongo-crud'
+import auth from '@uscreen.de/fastify-mongo-auth'
 
 /**
  * mongodb related
  */
-module.exports = fp(async (fastify, opts) => {
+export default fp(async (fastify, opts) => {
   /**
    * 1) setup mongodb connection
    */
@@ -73,7 +73,7 @@ __Prepare__ account within a `service/accounts.js` file:
 ```js
 'use strict'
 
-module.exports = async fastify => {
+export default async fastify => {
   const { auth } = fastify
 
   /**
@@ -95,7 +95,7 @@ __Usage__ within a `services/auth.js` file:
 ```js
 'use strict'
 
-module.exports = async fastify => {
+export default async fastify => {
   const { auth } = fastify
 
   /**

@@ -1,13 +1,13 @@
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
-const Fastify = require('fastify')
-const mongodb = require('fastify-mongodb')
-const sensible = require('fastify-sensible')
-const crud = require('@uscreen.de/fastify-mongo-crud')
-const session = require('fastify-secure-session')
-const auth = require('../index')
+import fs from 'fs'
+import path from 'path'
+import Fastify from 'fastify'
+import mongodb from 'fastify-mongodb'
+import sensible from 'fastify-sensible'
+import crud from '@uscreen.de/fastify-mongo-crud'
+import session from 'fastify-secure-session'
+import auth from '../index.js'
 
 const database = process.env.TAP_CHILD_ID
   ? `npm-auth-test-${process.env.TAP_CHILD_ID}`
@@ -16,7 +16,7 @@ const database = process.env.TAP_CHILD_ID
 const mongoServer = process.env.mongoServer || '127.0.0.1:27017'
 const mongoUri = `mongodb://${mongoServer}/${database}`
 
-const build = async (
+export const build = async (
   t,
   { usernameToLowerCase = true, addSessionDecorator = false }
 ) => {
@@ -76,8 +76,4 @@ const build = async (
   await fastify.mongo.db.dropDatabase()
 
   return fastify
-}
-
-module.exports = {
-  build
 }
