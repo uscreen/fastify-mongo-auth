@@ -67,9 +67,10 @@ const fastifyMongoAuth = async (fastify, opts, next) => {
     const sid = req.session.get('_id')
     try {
       req[user] = sid && (await auth.collection.read(sid))
-    } catch (err) /* istanbul ignore next */ {
+    } catch (err) /* c8 ignore start */ {
       fastify.log.error(err)
     }
+    /* c8 ignore stop */
   })
 
   /**
