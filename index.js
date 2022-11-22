@@ -1,5 +1,3 @@
-'use strict'
-
 import envSchema from 'env-schema'
 import fp from 'fastify-plugin'
 import session from '@fastify/secure-session'

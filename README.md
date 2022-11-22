@@ -33,8 +33,6 @@ $ secure-session-gen-key > session-key
 __Setup__ within a `plugins/mongo.js` file to resolve required dependencies before:
 
 ```js
-'use strict'
-
 import fs from 'fs'
 import path from 'path'
 import fp from 'fastify-plugin'
@@ -71,8 +69,6 @@ export default fp(async (fastify, opts) => {
 __Prepare__ account within a `service/accounts.js` file:
 
 ```js
-'use strict'
-
 export default async fastify => {
   const { auth } = fastify
 
@@ -93,8 +89,6 @@ export default async fastify => {
 __Usage__ within a `services/auth.js` file:
 
 ```js
-'use strict'
-
 export default async fastify => {
   const { auth } = fastify
 
