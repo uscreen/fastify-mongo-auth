@@ -3,10 +3,10 @@
 import fs from 'fs'
 import path from 'path'
 import Fastify from 'fastify'
-import mongodb from 'fastify-mongodb'
-import sensible from 'fastify-sensible'
+import mongodb from '@fastify/mongodb'
+import sensible from '@fastify/sensible'
+import session from '@fastify/secure-session'
 import crud from '@uscreen.de/fastify-mongo-crud'
-import session from 'fastify-secure-session'
 import auth from '../index.js'
 
 const database = process.env.TAP_CHILD_ID

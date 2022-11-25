@@ -2,7 +2,7 @@
 
 import envSchema from 'env-schema'
 import fp from 'fastify-plugin'
-import session from 'fastify-secure-session'
+import session from '@fastify/secure-session'
 import securePassword from 'secure-password'
 const pwd = securePassword()
 
@@ -161,5 +161,5 @@ export default fp(fastifyMongoAuth, {
   decorators: {
     fastify: ['httpErrors', 'crud']
   },
-  dependencies: ['fastify-sensible', 'fastify-mongo-crud']
+  dependencies: ['@fastify/sensible', 'fastify-mongo-crud']
 })
