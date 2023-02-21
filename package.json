@@ -13,15 +13,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@uscreen.de/dev-service": "^0.12.2",
-    "@uscreen.de/eslint-config-prettystandard-node": "^0.2.10",
+    "@uscreen.de/dev-service": "^0.12.3",
+    "@uscreen.de/eslint-config-prettystandard-node": "^0.2.11",
     "@uscreen.de/fastify-mongo-crud": "^0.4.13",
-    "fastify": "^3.29.4",
+    "fastify": "^3.29.5",
     "fastify-mongodb": "^3.0.0",
     "fastify-sensible": "^3.2.0",
     "husky": ">=8.0.2",
-    "lint-staged": ">=13.1.0",
-    "tap": "^16.3.2"
+    "lint-staged": ">=13.1.2",
+    "tap": "^16.3.4"
   },
   "dependencies": {
     "env-schema": "^5.1.1",
