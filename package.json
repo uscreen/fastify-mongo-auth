@@ -4,9 +4,10 @@
   "description": "Stateless session backed by authentication against mongodb collection",
   "main": "index.js",
   "type": "module",
+  "homepage": "https://github.com/uscreen/fastify-mongo-auth",
   "repository": {
     "type": "git",
-    "url": "git@gitlab.uscreen.net:uscreen/npm/fastify-mongo-auth.git"
+    "url": "git+https://github.com/uscreen/fastify-mongo-auth.git"
   },
   "author": {
     "name": "Marcus Spiegel",
