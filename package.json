@@ -16,19 +16,19 @@
   "devDependencies": {
     "@fastify/mongodb": "^6.1.0",
     "@fastify/sensible": "^5.1.1",
-    "@uscreen.de/dev-service": "^0.11.21",
-    "@uscreen.de/eslint-config-prettystandard-node": "^0.2.10",
+    "@uscreen.de/dev-service": "^0.12.3",
+    "@uscreen.de/eslint-config-prettystandard-node": "^0.2.11",
     "@uscreen.de/fastify-mongo-crud": "^1.0.0-1",
-    "c8": "^7.12.0",
-    "fastify": "^4.10.2",
+    "c8": "^7.13.0",
+    "fastify": "^4.13.0",
     "husky": ">=8.0.2",
-    "lint-staged": ">=13.0.3",
-    "tap": "^16.3.2"
+    "lint-staged": ">=13.1.2",
+    "tap": "^16.3.4"
   },
   "dependencies": {
-    "@fastify/secure-session": "^5.2.0",
+    "@fastify/secure-session": "^6.0.0",
     "env-schema": "^5.1.1",
-    "fastify-plugin": "^4.3.0",
+    "fastify-plugin": "^4.5.0",
     "secure-password": "^4.0.0"
   },
   "scripts": {
