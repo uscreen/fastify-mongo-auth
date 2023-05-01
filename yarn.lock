@@ -1052,7 +1052,7 @@
   dependencies:
     fast-json-stringify "^5.0.0"
 
-"@fastify/mongodb@^6.1.0":
+"@fastify/mongodb@^6.1.0", "@fastify/mongodb@^6.2.0":
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@fastify/mongodb/-/mongodb-6.2.0.tgz#bb044cc5681204e4f3e84d85a2c33d72d3300355"
   integrity sha512-ed/kbWTd9TtDvg5IYHQ54g01twAlFlJRBcF31imVX4eQEhUNe9mvIQopVUHErqOjAtQRuF6uQeqTdpiJBx+4+A==
@@ -1279,12 +1279,12 @@
     prettier "^2.8.3"
 
 "@uscreen.de/fastify-mongo-crud@^1.0.0-1":
-  version "1.0.0-1"
-  resolved "https://registry.yarnpkg.com/@uscreen.de/fastify-mongo-crud/-/fastify-mongo-crud-1.0.0-1.tgz#eb22aa343e53229b25c53301175a26d1748f81cc"
-  integrity sha512-252/v5W7+4NdT64j8mtTg4YlfphZKGKsgD4yl1waTrSO9iJ0tSPniZPiMsseFkdrmT7+59xz3kgVS0nnpsUj8w==
+  version "1.0.0-2"
+  resolved "https://registry.yarnpkg.com/@uscreen.de/fastify-mongo-crud/-/fastify-mongo-crud-1.0.0-2.tgz#05e79050529e3a9bc4ed158fe4c4e90111179be2"
+  integrity sha512-VQQPUNhWlurmaX8HCX9Lfq11Mr4vCFhGqUiijn4C64thNL5jKRKmkBzPqGNRZA/emqqRbERkIVOJqPsIETE0Rw==
   dependencies:
-    "@fastify/mongodb" "^6.1.0"
-    fastify-plugin "^4.3.0"
+    "@fastify/mongodb" "^6.2.0"
+    fastify-plugin "^4.5.0"
 
 abort-controller@^3.0.0:
   version "3.0.0"
@@ -2386,7 +2386,7 @@ fast-xml-parser@4.0.11:
   dependencies:
     strnum "^1.0.5"
 
-fastify-plugin@^4.0.0, fastify-plugin@^4.3.0, fastify-plugin@^4.5.0:
+fastify-plugin@^4.0.0, fastify-plugin@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-4.5.0.tgz#8b853923a0bba6ab6921bb8f35b81224e6988d91"
   integrity sha512-79ak0JxddO0utAXAQ5ccKhvs6vX2MGyHHMMsmZkBANrq3hXc1CHzvNPHOcvTsVMEPl5I+NT+RO4YKMGehOfSIg==
