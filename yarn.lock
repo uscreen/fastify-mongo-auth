@@ -435,9 +435,9 @@
   integrity sha512-S9q47ByT2pPvD65IvrWp7qppVMpk9WGMbVq9wbWZOHg6tnXSD4vyhao6nOSBwwfDdV2p3Kx9evA9vI+XWTfDvw==
 
 "@uscreen.de/dev-service@^0.12.3":
-  version "0.12.5"
-  resolved "https://registry.yarnpkg.com/@uscreen.de/dev-service/-/dev-service-0.12.5.tgz#9e14e2c90ff449dd09266dd6808254eb19bee48d"
-  integrity sha512-C7LAeTLbBigpkh5b7AdrKKa1wR5RXW8YQmBfzNCFGqNWA9Pjq0pkoo5Ctvg+v9OFomvpEAow66oV2lfXI7DFCw==
+  version "0.12.8"
+  resolved "https://registry.yarnpkg.com/@uscreen.de/dev-service/-/dev-service-0.12.8.tgz#41dedeba45af1c2963c0b6309fdc574c9344ab7b"
+  integrity sha512-VkpoFMQV7hvTvo20Ksl4JUNoXUjSvNMtqnOzBx1EETqA59K3ydHmzcxOsLUYZYLGnvvd09pTa3PFdgutBNSeBA==
   dependencies:
     c8 "^7.12.0"
     commander "^10.0.0"
