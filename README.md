@@ -1,7 +1,7 @@
 # fastify-mongo-auth
 
 [![Test CI](https://github.com/uscreen/fastify-mongo-auth/actions/workflows/main.yml/badge.svg)](https://github.com/uscreen/fastify-mongo-auth/actions/workflows/node.js.yml)
-[![Test Coverage](https://coveralls.io/repos/github/uscreen/fastify-mongo-auth/badge.svg?branch=master)](https://coveralls.io/github/uscreen/fastify-mongo-auth?branch=master)
+[![Test Coverage](https://coveralls.io/repos/github/uscreen/fastify-mongo-auth/badge.svg?branch=next)](https://coveralls.io/github/uscreen/fastify-mongo-auth?branch=next)
 [![Known Vulnerabilities](https://snyk.io/test/github/uscreen/fastify-mongo-auth/badge.svg?targetFile=package.json)](https://snyk.io/test/github/uscreen/fastify-mongo-auth?targetFile=package.json)
 [![NPM Version](https://badge.fury.io/js/@uscreen.de%2Ffastify-mongo-auth.svg)](https://badge.fury.io/js/@uscreen.de%2Ffastify-mongo-auth)
 
@@ -10,7 +10,7 @@
 __Provides:__
 
 - `fastify.auth` - the authentication adapter with it's api (see below)
-- `req.session` - as provided by [fastify-secure-session](https://www.npmjs.com/package/fastify-secure-session)
+- `req.session` - as provided by [@fastify/secure-session](https://www.npmjs.com/package/@fastify/secure-session)
 - `req.user` - (default, customize by `decorateRequest` option) will be a current authenticated user account
 
 Uses [secure-password](https://www.npmjs.com/package/secure-password) for hashing and verification
@@ -24,10 +24,10 @@ $ yarn add @uscreen.de/fastify-mongo-auth
 ## Add Dependencies
 
 ```sh
-$ yarn add fastify-mongodb @uscreen.de/fastify-mongo-crud
+$ yarn add @fastify/mongodb @uscreen.de/fastify-mongo-crud
 ```
 
-The session package `fastify-secure-session` (see [@npm](https://www.npmjs.com/package/fastify-secure-session)) requires a secret or key. We stick to recommended setup with a generated key below, so you should generate one too:
+The session package `@fastify/secure-session` (see [@npm](https://www.npmjs.com/package/@fastify/secure-session)) requires a secret or key. We stick to recommended setup with a generated key below, so you should generate one too:
 
 ```sh
 $ secure-session-gen-key > session-key
@@ -38,19 +38,17 @@ $ secure-session-gen-key > session-key
 __Setup__ within a `plugins/mongo.js` file to resolve required dependencies before:
 
 ```js
-'use strict'
-
-const fs = require('fs')
-const path = require('path')
-const fp = require('fastify-plugin')
-const mongodb = require('fastify-mongodb')
-const crud = require('@uscreen.de/fastify-mongo-crud')
-const auth = require('@uscreen.de/fastify-mongo-auth')
+import fs from 'fs'
+import path from 'path'
+import fp from 'fastify-plugin'
+import mongodb from '@fastify/mongodb'
+import crud from '@uscreen.de/fastify-mongo-crud'
+import auth from '@uscreen.de/fastify-mongo-auth'
 
 /**
  * mongodb related
  */
-module.exports = fp(async (fastify, opts) => {
+export default fp(async (fastify, opts) => {
   /**
    * 1) setup mongodb connection
    */
@@ -76,9 +74,7 @@ module.exports = fp(async (fastify, opts) => {
 __Prepare__ account within a `service/accounts.js` file:
 
 ```js
-'use strict'
-
-module.exports = async fastify => {
+export default async fastify => {
   const { auth } = fastify
 
   /**
@@ -98,9 +94,7 @@ module.exports = async fastify => {
 __Usage__ within a `services/auth.js` file:
 
 ```js
-'use strict'
-
-module.exports = async fastify => {
+export default async fastify => {
   const { auth } = fastify
 
   /**
@@ -137,7 +131,7 @@ module.exports = async fastify => {
 |-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
 | __collection__          | Name of the mongodb collection the accounts are stored in.                                                                                                    | `"accounts"`    |
 | __cookie__              | Options for session cookie as listed here [`cookie`](https://github.com/jshttp/cookie#readme).                                                                | `{ path: '/' }` |
-| __key__                 | Path to file of session-key [`fastify-secure-session`](https://www.npmjs.com/package/fastify-secure-session) uses to ensure secure stateless cookie sessions. | `""`            |
+| __key__                 | Path to file of session-key [`@fastify/secure-session`](https://www.npmjs.com/package/@fastify/secure-session) uses to ensure secure stateless cookie sessions. | `""`            |
 | __decorateRequest__     | Property providing current authenticated account object within request object. (ie.: `req.user` as default)                                                   | `"user"`        |
 | __usernameToLowerCase__ | Should usernames be treated case-insensitive (by lower-casing all queries) or not.                                                                            | `true`          |
 | __usernameField__       | Name of property for usernames. Affects mongodb documents and the login handler (see below).                                                                  | `"username"`    |
@@ -192,6 +186,12 @@ Handler returning the current authenticated account (i.e. called by `GET /curren
 - maybe add routes?
 
 ## Changelog
+### v1.0.0
+
+#### Changed
+
+- switch to __ESM only__
+- upgrade to fastify@4.x
 
 ### v0.2.0
 

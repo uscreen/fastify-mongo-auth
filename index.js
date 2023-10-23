@@ -1,9 +1,7 @@
-'use strict'
-
-const envSchema = require('env-schema')
-const fp = require('fastify-plugin')
-const session = require('fastify-secure-session')
-const securePassword = require('secure-password')
+import envSchema from 'env-schema'
+import fp from 'fastify-plugin'
+import session from '@fastify/secure-session'
+import securePassword from 'secure-password'
 const pwd = securePassword()
 
 const schema = {
@@ -37,7 +35,7 @@ const fastifyMongoAuth = async (fastify, opts, next) => {
     usernameField,
     passwordField
   } = envSchema({
-    schema: schema,
+    schema,
     data: opts,
     dotenv: opts.useDotenv
   })
@@ -67,9 +65,10 @@ const fastifyMongoAuth = async (fastify, opts, next) => {
     const sid = req.session.get('_id')
     try {
       req[user] = sid && (await auth.collection.read(sid))
-    } catch (err) /* istanbul ignore next */ {
+    } catch (err) /* c8 ignore start */ {
       fastify.log.error(err)
     }
+    /* c8 ignore stop */
   })
 
   /**
@@ -154,11 +153,11 @@ const fastifyMongoAuth = async (fastify, opts, next) => {
   next()
 }
 
-module.exports = fp(fastifyMongoAuth, {
+export default fp(fastifyMongoAuth, {
   fastify: '>=2.x',
   name: 'fastify-mongo-auth',
   decorators: {
     fastify: ['httpErrors', 'crud']
   },
-  dependencies: ['fastify-sensible', 'fastify-mongo-crud']
+  dependencies: ['@fastify/sensible', 'fastify-mongo-crud']
 })
