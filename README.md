@@ -179,7 +179,6 @@ Handler returning the current authenticated account (i.e. called by `GET /curren
 
 ## Roadmap
 
-- test
 - docs
 - improved dependency handling
 - improved onboarding
@@ -187,6 +186,13 @@ Handler returning the current authenticated account (i.e. called by `GET /curren
 - maybe add routes?
 
 ## Changelog
+
+### v1.1.0
+
+#### Added
+
+- filter option to filter valid accounts (defaults to `{}`)
+
 ### v1.0.0
 
 #### Changed
