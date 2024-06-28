@@ -136,6 +136,7 @@ export default async fastify => {
 | __usernameToLowerCase__ | Should usernames be treated case-insensitive (by lower-casing all queries) or not.                                                                            | `true`          |
 | __usernameField__       | Name of property for usernames. Affects mongodb documents and the login handler (see below).                                                                  | `"username"`    |
 | __passwordField__       | Name of property for passwords.                                                                                                                               | `"password"`    |
+| __filter__              | Filter expression for valid accounts (e.g. `{ active: true }`).                                                                                               | `{}`            |
 
 ## API
 

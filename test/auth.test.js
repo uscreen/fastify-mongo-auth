@@ -175,3 +175,83 @@ tap.test('fastify-mongo-auth: edges', async (t) => {
     t.end()
   })
 })
+
+tap.test('fastify-mongo-auth: filter', async (t) => {
+  const filter = { disabled: { $ne: true } }
+
+  const fastify = await build(t, { filter })
+  let currentCookie = null
+
+  t.test('should register a valid new user', async (t) => {
+    try {
+      const { statusCode } = await fastify.inject({
+        method: 'POST',
+        url: '/register',
+        payload: {
+          username: 'foo',
+          password: 'bar'
+        }
+      })
+
+      t.equal(200, statusCode, 'should equal 200')
+    } catch (err) {}
+    t.end()
+  })
+
+  t.test('should login a valid user', async (t) => {
+    try {
+      const { statusCode, cookies } = await fastify.inject({
+        method: 'POST',
+        url: '/login',
+        payload: {
+          username: 'foo',
+          password: 'bar'
+        }
+      })
+
+      t.equal(200, statusCode, 'should equal 200')
+      currentCookie = cookies.find((c) => c.name === 'session')
+      t.ok(currentCookie, 'delivered correct cookie')
+    } catch (err) {}
+    t.end()
+  })
+
+  t.test(
+    'should prohibit access to protected route for logged in, but disabled user',
+    async (t) => {
+      await fastify.auth.collection.collection.updateOne(
+        { username: 'foo' },
+        { $set: { disabled: true } }
+      )
+
+      try {
+        const { statusCode } = await fastify.inject({
+          method: 'GET',
+          url: '/currentUser',
+          cookies: {
+            [currentCookie.name]: currentCookie.value
+          }
+        })
+        t.equal(401, statusCode, 'should equal 401')
+      } catch (err) {}
+      t.end()
+    }
+  )
+
+  t.test('should not login disabled user', async (t) => {
+    try {
+      const { statusCode } = await fastify.inject({
+        method: 'POST',
+        url: '/login',
+        payload: {
+          username: 'foo',
+          password: 'bar'
+        }
+      })
+      t.equal(401, statusCode, 'should equal 401')
+    } catch (err) {}
+    t.end()
+  })
+
+  t.end()
+})

@@ -16,7 +16,7 @@ const mongoUri = `mongodb://${mongoServer}/${database}`
 
 export const build = async (
   t,
-  { usernameToLowerCase = true, addSessionDecorator = false }
+  { usernameToLowerCase = true, addSessionDecorator = false, filter = {} }
 ) => {
   const fastify = Fastify()
 
@@ -40,7 +40,8 @@ export const build = async (
   fastify.register(auth, {
     key: fs.readFileSync(path.join(process.cwd(), 'test/session-key')),
     decorateRequest: 'account',
-    usernameToLowerCase
+    usernameToLowerCase,
+    filter
   })
 
   // test routes

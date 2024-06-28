@@ -15,6 +15,9 @@ const schema = {
     collection: {
       default: 'accounts'
     },
+    filter: {
+      default: {}
+    },
     usernameToLowerCase: {
       default: true
     },
@@ -31,6 +34,7 @@ const fastifyMongoAuth = async (fastify, opts, next) => {
   const {
     decorateRequest: user,
     collection,
+    filter,
     usernameToLowerCase,
     usernameField,
     passwordField
@@ -64,7 +68,12 @@ const fastifyMongoAuth = async (fastify, opts, next) => {
     req[user] = null
     const sid = req.session.get('_id')
     try {
-      req[user] = sid && (await auth.collection.read(sid))
+      req[user] =
+        sid &&
+        (await auth.collection.findOne({
+          _id: fastify.mongo.ObjectId(sid),
+          ...filter
+        }))
     } catch (err) /* c8 ignore start */ {
       fastify.log.error(err)
     }
@@ -116,10 +125,12 @@ const fastifyMongoAuth = async (fastify, opts, next) => {
       query[usernameField] = usernameToLowerCase
         ? req.body[usernameField].toLowerCase()
         : req.body[usernameField]
-      const account = await auth.collection.findOne(query).catch((e) => {
-        /* istanbul ignore next */
-        fastify.log.error(e)
-      })
+      const account = await auth.collection
+        .findOne({ ...query, ...filter })
+        .catch((e) => {
+          /* istanbul ignore next */
+          fastify.log.error(e)
+        })
       if (account && auth.verifyHash(req.body[passwordField], account.hash)) {
         req.session.set('_id', account._id)
         return { account }
