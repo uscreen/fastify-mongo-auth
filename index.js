@@ -30,7 +30,7 @@ const schema = {
   }
 }
 
-const fastifyMongoAuth = async (fastify, opts, next) => {
+const fastifyMongoAuth = (fastify, opts, next) => {
   const {
     decorateRequest: user,
     collection,
