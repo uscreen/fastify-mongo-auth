@@ -1,3 +1,4 @@
+import { id as uuid } from '@uscreen.de/id-generator'
 import fs from 'fs'
 import path from 'path'
 import Fastify from 'fastify'
@@ -7,10 +8,7 @@ import session from '@fastify/secure-session'
 import crud from '@uscreen.de/fastify-mongo-crud'
 import auth from '../index.js'
 
-const database = process.env.TAP_CHILD_ID
-  ? `npm-auth-test-${process.env.TAP_CHILD_ID}`
-  : 'npm-auth-test'
-
+const database = uuid('npm-auth-test')
 const mongoServer = process.env.mongoServer || '127.0.0.1:27017'
 const mongoUri = `mongodb://${mongoServer}/${database}`
 
@@ -70,7 +68,7 @@ export const build = async (
 
   fastify.register(routes)
 
-  t.teardown(fastify.close.bind(fastify))
+  t.after(() => fastify.close())
   await fastify.ready()
   await fastify.mongo.db.dropDatabase()
 
