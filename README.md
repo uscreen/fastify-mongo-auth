@@ -18,13 +18,13 @@ Uses [secure-password](https://www.npmjs.com/package/secure-password) for hashin
 ## Install
 
 ```sh
-$ yarn add @uscreen.de/fastify-mongo-auth
+$ pnpm add @uscreen.de/fastify-mongo-auth
 ```
 
 ## Add Dependencies
 
 ```sh
-$ yarn add @fastify/mongodb @uscreen.de/fastify-mongo-crud
+$ pnpm add @fastify/mongodb @uscreen.de/fastify-mongo-crud
 ```
 
 The session package `@fastify/secure-session` (see [@npm](https://www.npmjs.com/package/@fastify/secure-session)) requires a secret or key. We stick to recommended setup with a generated key below, so you should generate one too:
