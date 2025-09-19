@@ -187,6 +187,12 @@ Handler returning the current authenticated account (i.e. called by `GET /curren
 
 ## Changelog
 
+### v2.0.0
+
+#### Changed
+
+- upgrade to fastify@5.x
+
 ### v1.1.0
 
 #### Added
