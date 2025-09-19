@@ -21,7 +21,6 @@ export const build = async (
   fastify.register(sensible)
   fastify.register(mongodb, {
     forceClose: true,
-    useUnifiedTopology: true,
     url: mongoUri
   })
   fastify.register(crud)

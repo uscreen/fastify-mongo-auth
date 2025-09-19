@@ -15,19 +15,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@fastify/mongodb": "^6.1.0",
-    "@fastify/sensible": "^5.1.1",
-    "@uscreen.de/dev-service": "^0.12.3",
-    "@uscreen.de/eslint-config-prettystandard-node": "^0.2.11",
-    "@uscreen.de/fastify-mongo-crud": "^1.0.0-1",
+    "@fastify/mongodb": "^9.0.2",
+    "@fastify/sensible": "^6.0.3",
+    "@uscreen.de/dev-service": "^0.12.12",
+    "@uscreen.de/eslint-config-prettystandard-node": "^0.2.12",
+    "@uscreen.de/fastify-mongo-crud": "^2.0.0",
     "@uscreen.de/id-generator": "^1.0.0",
-    "c8": "^8.0.0",
-    "fastify": "^4.13.0"
+    "c8": "^10.1.3",
+    "fastify": "^5.6.0"
   },
   "dependencies": {
-    "@fastify/secure-session": "^7.0.0",
-    "env-schema": "^5.1.1",
-    "fastify-plugin": "^4.5.0",
+    "@fastify/secure-session": "^8.2.0",
+    "env-schema": "^6.0.1",
+    "fastify-plugin": "^5.0.1",
     "secure-password": "^4.0.0"
   },
   "scripts": {

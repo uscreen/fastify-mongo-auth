@@ -71,7 +71,7 @@ const fastifyMongoAuth = (fastify, opts, next) => {
       req[user] =
         sid &&
         (await auth.collection.findOne({
-          _id: fastify.mongo.ObjectId(sid),
+          _id: new fastify.mongo.ObjectId(sid),
           ...filter
         }))
     } catch (err) /* c8 ignore start */ {
