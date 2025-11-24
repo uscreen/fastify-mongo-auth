@@ -18,7 +18,7 @@
     "@fastify/mongodb": "^9.0.2",
     "@fastify/sensible": "^6.0.3",
     "@uscreen.de/dev-service": "^0.13.0",
-    "@uscreen.de/eslint-config-prettystandard-node": "^0.2.12",
+    "@uscreen.de/eslint-config-prettystandard-node": "^0.3.0",
     "@uscreen.de/fastify-mongo-crud": "^2.0.0",
     "@uscreen.de/id-generator": "^1.0.0",
     "c8": "^10.1.3",
