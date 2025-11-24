@@ -15,7 +15,7 @@
   "license": "MIT",
   "devDependencies": {
     "@uscreen.de/dev-service": "^0.13.0",
-    "@uscreen.de/eslint-config-prettystandard-node": "^0.2.11",
+    "@uscreen.de/eslint-config-prettystandard-node": "^0.3.0",
     "@uscreen.de/fastify-mongo-crud": "^0.4.13",
     "fastify": "^3.29.5",
     "fastify-mongodb": "^3.0.0",
