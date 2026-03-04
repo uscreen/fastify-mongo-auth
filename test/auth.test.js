@@ -1,5 +1,5 @@
-import test from 'node:test'
 import assert from 'node:assert/strict'
+import test from 'node:test'
 import { build } from './setup.js'
 
 test('fastify-mongo-auth: workflow', async (t) => {
@@ -7,7 +7,7 @@ test('fastify-mongo-auth: workflow', async (t) => {
   let currentCookie = null
   await t.test(
     'should prohibit access to protected route on unauthorized request',
-    async (t) => {
+    async () => {
       const { statusCode } = await fastify.inject({
         method: 'GET',
         url: '/currentUser'
@@ -15,7 +15,7 @@ test('fastify-mongo-auth: workflow', async (t) => {
       assert.equal(statusCode, 401, 'should equal 401')
     }
   )
-  await t.test('should register a valid new user', async (t) => {
+  await t.test('should register a valid new user', async () => {
     const { statusCode } = await fastify.inject({
       method: 'POST',
       url: '/register',
@@ -28,7 +28,7 @@ test('fastify-mongo-auth: workflow', async (t) => {
     assert.equal(statusCode, 200, 'should equal 200')
   })
 
-  await t.test('should login a valid user', async (t) => {
+  await t.test('should login a valid user', async () => {
     const { statusCode, cookies } = await fastify.inject({
       method: 'POST',
       url: '/login',
@@ -39,11 +39,11 @@ test('fastify-mongo-auth: workflow', async (t) => {
     })
 
     assert.equal(statusCode, 200, 'should equal 200')
-    currentCookie = cookies.find((c) => c.name === 'session')
+    currentCookie = cookies.find(c => c.name === 'session')
     assert.ok(currentCookie, 'delivered correct cookie')
   })
 
-  await t.test('should allow access on authenticated user', async (t) => {
+  await t.test('should allow access on authenticated user', async () => {
     const { statusCode } = await fastify.inject({
       method: 'GET',
       url: '/currentUser',
@@ -54,7 +54,7 @@ test('fastify-mongo-auth: workflow', async (t) => {
     assert.equal(statusCode, 200, 'should equal 200')
   })
 
-  await t.test('should log out authenticated user', async (t) => {
+  await t.test('should log out authenticated user', async () => {
     const { statusCode, cookies } = await fastify.inject({
       method: 'POST',
       url: '/logout',
@@ -62,7 +62,7 @@ test('fastify-mongo-auth: workflow', async (t) => {
         [currentCookie.name]: currentCookie.value
       }
     })
-    currentCookie = cookies.find((c) => c.name === 'session')
+    currentCookie = cookies.find(c => c.name === 'session')
     assert.equal(statusCode, 200, 'should equal 200')
     assert.ok(currentCookie, 'deliver adjusted cookie')
     assert.equal(currentCookie.value, '', 'deliver empty cookie value')
@@ -75,7 +75,7 @@ test('fastify-mongo-auth: workflow', async (t) => {
 
   await t.test(
     'should prohibit access to protected route on unauthorized request',
-    async (t) => {
+    async () => {
       const { statusCode } = await fastify.inject({
         method: 'GET',
         url: '/currentUser',
@@ -87,7 +87,7 @@ test('fastify-mongo-auth: workflow', async (t) => {
     }
   )
 
-  await t.test('should prohibit login with false credentials', async (t) => {
+  await t.test('should prohibit login with false credentials', async () => {
     const { statusCode } = await fastify.inject({
       method: 'POST',
       url: '/login',
@@ -105,7 +105,7 @@ test('fastify-mongo-auth: edges', async (t) => {
     usernameToLowerCase: false,
     addSessionDecorator: true
   })
-  await t.test('should register a valid new user', async (t) => {
+  await t.test('should register a valid new user', async () => {
     const { statusCode } = await fastify.inject({
       method: 'POST',
       url: '/register',
@@ -117,7 +117,7 @@ test('fastify-mongo-auth: edges', async (t) => {
 
     assert.equal(statusCode, 200, 'should equal 200')
   })
-  await t.test('should not login with lowercase user name', async (t) => {
+  await t.test('should not login with lowercase user name', async () => {
     const { statusCode } = await fastify.inject({
       method: 'POST',
       url: '/login',
@@ -129,7 +129,7 @@ test('fastify-mongo-auth: edges', async (t) => {
 
     assert.equal(statusCode, 401, 'should equal 401')
   })
-  await t.test('should login with uppercase user name', async (t) => {
+  await t.test('should login with uppercase user name', async () => {
     const { statusCode, cookies } = await fastify.inject({
       method: 'POST',
       url: '/login',
@@ -140,7 +140,7 @@ test('fastify-mongo-auth: edges', async (t) => {
     })
 
     assert.equal(statusCode, 200, 'should equal 200')
-    const currentCookie = cookies.find((c) => c.name === 'session')
+    const currentCookie = cookies.find(c => c.name === 'session')
     assert.ok(currentCookie, 'delivered correct cookie')
   })
 })
@@ -151,7 +151,7 @@ test('fastify-mongo-auth: filter', async (t) => {
   const fastify = await build(t, { filter })
   let currentCookie = null
 
-  await t.test('should register a valid new user', async (t) => {
+  await t.test('should register a valid new user', async () => {
     const { statusCode } = await fastify.inject({
       method: 'POST',
       url: '/register',
@@ -164,7 +164,7 @@ test('fastify-mongo-auth: filter', async (t) => {
     assert.equal(statusCode, 200, 'should equal 200')
   })
 
-  await t.test('should login a valid user', async (t) => {
+  await t.test('should login a valid user', async () => {
     const { statusCode, cookies } = await fastify.inject({
       method: 'POST',
       url: '/login',
@@ -175,13 +175,13 @@ test('fastify-mongo-auth: filter', async (t) => {
     })
 
     assert.equal(statusCode, 200, 'should equal 200')
-    currentCookie = cookies.find((c) => c.name === 'session')
+    currentCookie = cookies.find(c => c.name === 'session')
     assert.ok(currentCookie, 'delivered correct cookie')
   })
 
   await t.test(
     'should prohibit access to protected route for logged in, but disabled user',
-    async (t) => {
+    async () => {
       await fastify.auth.collection.collection.updateOne(
         { username: 'foo' },
         { $set: { disabled: true } }
@@ -198,7 +198,7 @@ test('fastify-mongo-auth: filter', async (t) => {
     }
   )
 
-  await t.test('should not login disabled user', async (t) => {
+  await t.test('should not login disabled user', async () => {
     const { statusCode } = await fastify.inject({
       method: 'POST',
       url: '/login',

@@ -1,7 +1,9 @@
+import { Buffer } from 'node:buffer'
+import session from '@fastify/secure-session'
 import envSchema from 'env-schema'
 import fp from 'fastify-plugin'
-import session from '@fastify/secure-session'
 import securePassword from 'secure-password'
+
 const pwd = securePassword()
 
 const schema = {
@@ -60,25 +62,6 @@ const fastifyMongoAuth = (fastify, opts, next) => {
       )
     })
   }
-
-  /**
-   * verify any request with existing session
-   */
-  fastify.addHook('preHandler', async (req, res) => {
-    req[user] = null
-    const sid = req.session.get('_id')
-    try {
-      req[user] =
-        sid &&
-        (await auth.collection.findOne({
-          _id: new fastify.mongo.ObjectId(sid),
-          ...filter
-        }))
-    } catch (err) /* c8 ignore start */ {
-      fastify.log.error(err)
-    }
-    /* c8 ignore stop */
-  })
 
   /**
    * auth object factory
@@ -155,6 +138,26 @@ const fastifyMongoAuth = (fastify, opts, next) => {
       return currentUser
     }
   }
+
+  /**
+   * verify any request with existing session
+   */
+  fastify.addHook('preHandler', async (req) => {
+    req[user] = null
+    const sid = req.session.get('_id')
+    try {
+      req[user]
+        = sid
+          && (await auth.collection.findOne({
+            _id: new fastify.mongo.ObjectId(sid),
+            ...filter
+          }))
+    }
+    catch (err) /* c8 ignore start */ {
+      fastify.log.error(err)
+    }
+    /* c8 ignore stop */
+  })
 
   /**
    * decorate fastify app with auth object

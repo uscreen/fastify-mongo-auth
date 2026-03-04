@@ -7,7 +7,7 @@
 
 > Stateless session backed by authentication against mongodb collection
 
-__Provides:__
+**Provides:**
 
 - `fastify.auth` - the authentication adapter with it's api (see below)
 - `req.session` - as provided by [@fastify/secure-session](https://www.npmjs.com/package/@fastify/secure-session)
@@ -35,7 +35,7 @@ $ secure-session-gen-key > session-key
 
 ## Example
 
-__Setup__ within a `plugins/mongo.js` file to resolve required dependencies before:
+**Setup** within a `plugins/mongo.js` file to resolve required dependencies before:
 
 ```js
 import fs from 'fs'
@@ -71,7 +71,7 @@ export default fp(async (fastify, opts) => {
 })
 ```
 
-__Prepare__ account within a `service/accounts.js` file:
+**Prepare** account within a `service/accounts.js` file:
 
 ```js
 export default async fastify => {
@@ -91,7 +91,7 @@ export default async fastify => {
 }
 ```
 
-__Usage__ within a `services/auth.js` file:
+**Usage** within a `services/auth.js` file:
 
 ```js
 export default async fastify => {
@@ -127,16 +127,16 @@ export default async fastify => {
 
 ## Options
 
-| Option                  | Description                                                                                                                                                   | Default         |
-|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
-| __collection__          | Name of the mongodb collection the accounts are stored in.                                                                                                    | `"accounts"`    |
-| __cookie__              | Options for session cookie as listed here [`cookie`](https://github.com/jshttp/cookie#readme).                                                                | `{ path: '/' }` |
-| __key__                 | Path to file of session-key [`@fastify/secure-session`](https://www.npmjs.com/package/@fastify/secure-session) uses to ensure secure stateless cookie sessions. | `""`            |
-| __decorateRequest__     | Property providing current authenticated account object within request object. (ie.: `req.user` as default)                                                   | `"user"`        |
-| __usernameToLowerCase__ | Should usernames be treated case-insensitive (by lower-casing all queries) or not.                                                                            | `true`          |
-| __usernameField__       | Name of property for usernames. Affects mongodb documents and the login handler (see below).                                                                  | `"username"`    |
-| __passwordField__       | Name of property for passwords.                                                                                                                               | `"password"`    |
-| __filter__              | Filter expression for valid accounts (e.g. `{ active: true }`).                                                                                               | `{}`            |
+| Option                  | Description                                                                                                                                                     | Default         |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
+| **collection**          | Name of the mongodb collection the accounts are stored in.                                                                                                      | `"accounts"`    |
+| **cookie**              | Options for session cookie as listed here [`cookie`](https://github.com/jshttp/cookie#readme).                                                                  | `{ path: '/' }` |
+| **key**                 | Path to file of session-key [`@fastify/secure-session`](https://www.npmjs.com/package/@fastify/secure-session) uses to ensure secure stateless cookie sessions. | `""`            |
+| **decorateRequest**     | Property providing current authenticated account object within request object. (ie.: `req.user` as default)                                                     | `"user"`        |
+| **usernameToLowerCase** | Should usernames be treated case-insensitive (by lower-casing all queries) or not.                                                                              | `true`          |
+| **usernameField**       | Name of property for usernames. Affects mongodb documents and the login handler (see below).                                                                    | `"username"`    |
+| **passwordField**       | Name of property for passwords.                                                                                                                                 | `"password"`    |
+| **filter**              | Filter expression for valid accounts (e.g. `{ active: true }`).                                                                                                 | `{}`            |
 
 ## API
 
@@ -158,7 +158,7 @@ Verifies the given password to the given hash.
 
 ### async loginHandler(req)
 
-Handler for logging in to an account (i.e. called by `POST /login`). Expects a `req` object with a `body` containing credentials as configured in __Options__, defaults to:
+Handler for logging in to an account (i.e. called by `POST /login`). Expects a `req` object with a `body` containing credentials as configured in **Options**, defaults to:
 
 ```json
 {
@@ -203,7 +203,7 @@ Handler returning the current authenticated account (i.e. called by `GET /curren
 
 #### Changed
 
-- switch to __ESM only__
+- switch to **ESM only**
 - upgrade to fastify@4.x
 
 ### v0.2.0

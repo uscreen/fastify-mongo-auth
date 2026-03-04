@@ -1,11 +1,12 @@
-import { id as uuid } from '@uscreen.de/id-generator'
-import fs from 'fs'
-import path from 'path'
-import Fastify from 'fastify'
+import fs from 'node:fs'
+import path from 'node:path'
+import process from 'node:process'
 import mongodb from '@fastify/mongodb'
-import sensible from '@fastify/sensible'
 import session from '@fastify/secure-session'
+import sensible from '@fastify/sensible'
 import crud from '@uscreen.de/fastify-mongo-crud'
+import { id as uuid } from '@uscreen.de/id-generator'
+import Fastify from 'fastify'
 import auth from '../index.js'
 
 const database = uuid('npm-auth-test')
@@ -44,7 +45,7 @@ export const build = async (
   // test routes
   const routes = (fastify, opts, done) => {
     const { auth } = fastify
-    fastify.post('/register', async (req) => ({
+    fastify.post('/register', async req => ({
       account: await auth.collection.create({
         hash: auth.createHash(req.body.password),
         username: usernameToLowerCase

@@ -1,20 +1,33 @@
 {
   "name": "@uscreen.de/fastify-mongo-auth",
+  "type": "module",
   "version": "2.0.0",
   "description": "Stateless session backed by authentication against mongodb collection",
-  "main": "index.js",
-  "type": "module",
-  "homepage": "https://github.com/uscreen/fastify-mongo-auth",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/uscreen/fastify-mongo-auth.git"
-  },
   "author": {
     "name": "Marcus Spiegel",
     "email": "spiegel@uscreen.de"
   },
   "license": "MIT",
+  "homepage": "https://github.com/uscreen/fastify-mongo-auth",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uscreen/fastify-mongo-auth.git"
+  },
+  "main": "index.js",
   "files": [],
+  "scripts": {
+    "test": "node --test --test-reporter spec",
+    "test:cov": "c8 --reporter=html --reporter=text node --test",
+    "test:ci": "c8 --reporter=lcovonly --reporter=text node --test",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@fastify/secure-session": "^8.3.0",
+    "env-schema": "^7.0.0",
+    "fastify-plugin": "^5.1.0",
+    "secure-password": "^4.0.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^7.6.1",
     "@fastify/mongodb": "^9.0.2",
@@ -26,19 +39,6 @@
     "eslint": "^9.39.3",
     "eslint-plugin-format": "^1.5.0",
     "fastify": "^5.7.4"
-  },
-  "dependencies": {
-    "@fastify/secure-session": "^8.3.0",
-    "env-schema": "^7.0.0",
-    "fastify-plugin": "^5.1.0",
-    "secure-password": "^4.0.0"
-  },
-  "scripts": {
-    "test": "node --test --test-reporter spec",
-    "test:cov": "c8 --reporter=html --reporter=text node --test",
-    "test:ci": "c8 --reporter=lcovonly --reporter=text node --test",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
   },
   "services": [
     "mongo"
