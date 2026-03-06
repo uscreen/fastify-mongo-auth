@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.6.1",
-    "@fastify/mongodb": "^9.0.2",
+    "@fastify/mongodb": "^10.0.0",
     "@fastify/sensible": "^6.0.4",
     "@uscreen.de/dev-service": "^0.13.1",
     "@uscreen.de/fastify-mongo-crud": "^2.0.0",
