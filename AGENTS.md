@@ -1,113 +1,104 @@
 # AGENTS.md - Developer Guide for Coding Agents
 
-This document provides essential information for AI coding agents working on the `@uscreen.de/fastify-mongo-auth` project.
+Guide for AI agents working on `@uscreen.de/fastify-mongo-auth` — a Fastify plugin providing session-backed authentication against a MongoDB collection.
 
-## Project Overview
+## Key Dependencies
 
-A Fastify plugin providing stateless session-backed authentication against a MongoDB collection. Uses `secure-password` for hashing and `@fastify/secure-session` for secure cookie-based sessions.
-
-**Key Dependencies:**
-- Fastify 5.x
-- MongoDB via `@fastify/mongodb`
-- `@uscreen.de/fastify-mongo-crud` for collection operations
-- `@fastify/secure-session` for session management
-- Node.js 24 (see `.nvmrc`)
+- **Runtime:** Node.js 24 (see `.nvmrc`), ES modules (`"type": "module"`)
+- **Fastify 5.x** with `@fastify/mongodb`, `@fastify/secure-session`, `@fastify/sensible`
+- **`@uscreen.de/fastify-mongo-crud`** for collection operations
+- **`secure-password`** for hashing, **`env-schema`** for option validation
+- **Package manager:** pnpm
 
 ## Build, Lint, and Test Commands
 
-### Installation
 ```bash
-pnpm install
-```
-
-### Linting
-```bash
-pnpm run lint          # Run ESLint with auto-fix on all JS files
-```
-
-### Testing
-```bash
-pnpm test              # Run all tests with spec reporter
-pnpm test:cov          # Run tests with coverage (HTML + text output)
-pnpm test:ci           # Run tests with lcov coverage for CI
-make test              # Alternative: run tests via Makefile
+pnpm install               # Install dependencies
+pnpm run lint              # Run ESLint (check only)
+pnpm run lint:fix          # Run ESLint with auto-fix
+pnpm test                  # Run all tests with spec reporter
+pnpm test:cov              # Tests with coverage (HTML + text)
+pnpm test:ci               # Tests with lcov coverage for CI
 ```
 
 ### Running Single Tests
+
 ```bash
-# Run tests matching a specific pattern
-node --test --test-name-pattern="should register"
-
 # Run a specific test file
-node --test test/auth.test.js
-
-# Run with spec reporter
 node --test --test-reporter spec test/auth.test.js
+
+# Run tests matching a name pattern
+node --test --test-reporter spec --test-name-pattern="should register"
 ```
 
-### Coverage
-Coverage reports are generated in the `coverage/` directory using `c8`.
+### Prerequisites
+
+- MongoDB must be running on `127.0.0.1:27017` (or set `mongoServer` env var)
+- `services/.compose/mongo.yml` provides a Docker Compose config for MongoDB
+- Tests auto-create and drop databases per run (via `@uscreen.de/id-generator`)
 
 ## Code Style Guidelines
 
 ### ESLint Configuration
-This project extends `@uscreen.de/eslint-config-prettystandard-node`. Always run `pnpm run lint` before committing.
 
-### Formatting Rules (from .editorconfig)
-- **Encoding:** UTF-8
-- **Indentation:** 2 spaces (not tabs)
-- **Line endings:** LF (Unix-style)
-- **Final newline:** Always insert
-- **Trailing whitespace:** Always trim
-- **Makefiles:** Use tabs (standard)
+Uses **`@antfu/eslint-config`** flat config in `eslint.config.js` with formatters enabled. Key rules:
+
+- **No trailing commas** (`style/comma-dangle: ['error', 'never']`)
+- **Curly braces:** required for multi-line blocks, consistent (`curly: ['error', 'multi-line', 'consistent']`)
+- **`console` allowed** (`no-console: off`)
+- **Arrow functions preferred** at top level (`antfu/top-level-function: off`)
+- **`node:test` imports allowed** (`test/no-import-node-test: off`)
+
+Always run `pnpm run lint` before committing.
+
+### Formatting (from .editorconfig)
+
+- **Indent:** 2 spaces (tabs in Makefiles only)
+- **Line endings:** LF, **Encoding:** UTF-8
+- **Final newline:** always, **Trailing whitespace:** trim
 
 ### Import Style
+
 ```javascript
-// Use ES modules (type: "module" in package.json)
+// Node builtins with node: prefix
+import { Buffer } from 'node:buffer'
+import fs from 'node:fs'
+
+// External packages
 import fp from 'fastify-plugin'
 import envSchema from 'env-schema'
 
-// Relative imports use .js extension
+// Relative imports with .js extension
 import { build } from './setup.js'
 import auth from '../index.js'
 ```
 
+### Naming Conventions
+
+- **Variables/Functions:** camelCase (`usernameField`, `createHash`, `loginHandler`)
+- **Constants:** camelCase for config objects, UPPER_CASE for true constants
+- **Plugin options:** validated via `envSchema` with defaults in a schema object
+- **Request decorators:** configurable name (default: `'user'` for `req.user`)
+
 ### Module Exports
+
 ```javascript
-// Default export wrapped with fastify-plugin
+// Main plugin: default export wrapped with fastify-plugin
 export default fp(fastifyMongoAuth, {
   fastify: '>=2.x',
   name: 'fastify-mongo-auth',
-  decorators: {
-    fastify: ['httpErrors', 'crud']
-  },
+  decorators: { fastify: ['httpErrors', 'crud'] },
   dependencies: ['@fastify/sensible', 'fastify-mongo-crud']
 })
 
-// Named exports for utilities
+// Test utilities: named exports
 export const build = async (t, options) => { /* ... */ }
 ```
 
-### Naming Conventions
-- **Variables/Functions:** camelCase (`usernameField`, `createHash`, `loginHandler`)
-- **Constants:** camelCase for config objects, UPPER_CASE for true constants
-- **Plugin options:** Use envSchema with default values
-- **Request decorators:** Configurable via options (default: `'user'` for `req.user`)
-
-### Type Usage
-This is a JavaScript project without TypeScript. Use JSDoc comments for complex functions when helpful:
-```javascript
-/**
- * Handler for logging in to an account
- * @param {Object} req - Fastify request object
- * @returns {Promise<{account: Object}>}
- */
-async loginHandler(req) { /* ... */ }
-```
-
 ### Error Handling
+
 ```javascript
-// Use fastify.httpErrors for standard HTTP errors
+// Use fastify.httpErrors for HTTP errors
 throw fastify.httpErrors.unauthorized()
 
 // Use try-catch with logging for unexpected errors
@@ -117,112 +108,70 @@ try {
   fastify.log.error(err)
 }
 
-// Prefer preHandler for authentication checks
-fastify.get('/protected', {
-  preHandler: auth.authorized
-}, handler)
+// Use preHandler for route-level auth checks
+fastify.get('/protected', { preHandler: auth.authorized }, handler)
 ```
 
 ### Testing Patterns
+
+Uses **Node.js native test runner** (`node:test`) with `node:assert/strict`:
+
 ```javascript
-// Use Node.js native test runner
-import test from 'node:test'
 import assert from 'node:assert/strict'
+import test from 'node:test'
 
 test('descriptive test name', async (t) => {
-  // Nested tests for related scenarios
-  await t.test('should do specific thing', async (t) => {
-    const result = await operation()
-    assert.equal(result.statusCode, 200)
+  const fastify = await build(t, {})
+
+  await t.test('should do specific thing', async () => {
+    const { statusCode, cookies } = await fastify.inject({
+      method: 'POST',
+      url: '/login',
+      payload: { username: 'foo', password: 'bar' }
+    })
+    assert.equal(statusCode, 200)
   })
 })
-
-// Use fastify.inject() for route testing
-const { statusCode, cookies } = await fastify.inject({
-  method: 'POST',
-  url: '/login',
-  payload: { username: 'foo', password: 'bar' }
-})
-
-// Clean up after tests
-t.after(() => fastify.close())
 ```
+
+- Use `fastify.inject()` for HTTP testing (no real server needed)
+- Cleanup via `t.after(() => fastify.close())` (done in `build()` helper)
+- Test setup helper in `test/setup.js` — registers all plugins and test routes
+- Coverage via `c8`, reports in `coverage/`
 
 ## Project Structure
 
 ```
-.
-├── index.js              # Main plugin implementation
+├── index.js              # Main plugin (auth object, hooks, handlers)
+├── eslint.config.js      # ESLint flat config (@antfu/eslint-config)
 ├── test/
-│   ├── setup.js         # Test utilities and helpers
-│   ├── auth.test.js     # Authentication workflow tests
-│   └── noop.test.js     # Minimal test
-├── services/            # Example service files (not in main code)
-├── package.json
-├── .eslintrc            # ESLint configuration
-├── .editorconfig        # Editor formatting rules
-├── .nvmrc              # Node version (24)
-└── Makefile            # Build shortcuts
+│   ├── setup.js          # Test helper: builds Fastify instance with plugins
+│   ├── auth.test.js      # Authentication workflow tests
+│   ├── noop.test.js      # Minimal sanity test
+│   └── session-key       # Pre-generated key for @fastify/secure-session
+├── services/.compose/    # Docker Compose for MongoDB
+├── Makefile              # Shortcuts for test/coverage
+└── .nvmrc                # Node version (24)
 ```
 
-## Key Implementation Details
+## Plugin Registration Order
 
-### Plugin Registration
-Always register dependencies in order:
-1. `@fastify/sensible` (provides httpErrors)
-2. `@fastify/mongodb`
-3. `@uscreen.de/fastify-mongo-crud`
-4. `@uscreen.de/fastify-mongo-auth`
+Dependencies must be registered in this order:
+1. `@fastify/sensible` (provides `httpErrors`)
+2. `@fastify/mongodb` (provides `fastify.mongo`)
+3. `@uscreen.de/fastify-mongo-crud` (provides `fastify.crud()`)
+4. `@uscreen.de/fastify-mongo-auth` (provides `fastify.auth`)
 
-### Authentication Flow
-1. Plugin adds preHandler hook to check session on every request
-2. Sets `req[decorateRequest]` to authenticated user or null
-3. `auth.authorized` preHandler throws 401 if not authenticated
-4. Login sets session `_id`, logout deletes session
+## Authentication Flow
 
-### MongoDB Patterns
-```javascript
-// Access collection via auth.collection getter
-const account = await auth.collection.findOne({ username })
-
-// Filter option applies to all queries (e.g., { active: true })
-const account = await auth.collection.findOne({ ...query, ...filter })
-
-// Use fastify.mongo.ObjectId for _id queries
-new fastify.mongo.ObjectId(sid)
-```
-
-## Testing Requirements
-
-- MongoDB must be running (default: `127.0.0.1:27017`)
-- Tests automatically create/drop test databases
-- Use unique database names per test run (via `id-generator`)
-- All tests must pass before merging
-- Coverage reports required for CI
+1. Plugin registers a global `preHandler` hook that checks session for `_id`
+2. If valid session, loads user from MongoDB and sets `req[decorateRequest]`
+3. `auth.authorized` preHandler throws 401 if no authenticated user
+4. `loginHandler` verifies password hash, sets session `_id`
+5. `logoutHandler` calls `req.session.delete()`
+6. `filter` option (e.g., `{ active: true }`) is applied to all user queries
 
 ## Commit Guidelines
 
-- Run `pnpm run lint` before committing
-- Ensure all tests pass (`pnpm test`)
-- Follow conventional commit messages if project uses them
-- Don't commit `node_modules/`, `coverage/`, or `.nyc_output/`
-
-## Common Tasks
-
-### Adding a New Handler
-1. Add method to `auth` object in `index.js`
-2. Follow existing patterns (`loginHandler`, `logoutHandler`, `currentUserHandler`)
-3. Add corresponding test in `test/auth.test.js`
-4. Document in README.md API section
-
-### Modifying Authentication Logic
-1. Update preHandler hook or `authorized` method in `index.js`
-2. Ensure filter option is applied correctly
-3. Add/update tests covering new behavior
-4. Update documentation if API changes
-
-### Adding Configuration Options
-1. Add to schema object in `index.js`
-2. Destructure in plugin function
-3. Add to README.md Options table
-4. Test with custom options in `test/setup.js`
+- Run `pnpm run lint` and `pnpm test` before committing
+- Don't commit `node_modules/`, `coverage/`, `.nyc_output/`, `.env`
