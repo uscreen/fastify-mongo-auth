@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@fastify/secure-session": "^8.3.0",
-    "env-schema": "^7.0.0",
+    "env-schema": "^8.0.0",
     "fastify-plugin": "^5.1.0",
     "secure-password": "^4.0.0"
   },
