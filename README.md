@@ -1,6 +1,6 @@
 # fastify-mongo-auth
 
-[![Test CI](https://github.com/uscreen/fastify-mongo-auth/actions/workflows/main.yml/badge.svg)](https://github.com/uscreen/fastify-mongo-auth/actions/workflows/node.js.yml)
+[![Test CI](https://github.com/uscreen/fastify-mongo-auth/actions/workflows/main.yml/badge.svg)](https://github.com/uscreen/fastify-mongo-auth/actions/workflows/main.yml)
 [![Test Coverage](https://coveralls.io/repos/github/uscreen/fastify-mongo-auth/badge.svg?branch=main)](https://coveralls.io/github/uscreen/fastify-mongo-auth?branch=main)
 [![Known Vulnerabilities](https://snyk.io/test/github/uscreen/fastify-mongo-auth/badge.svg?targetFile=package.json)](https://snyk.io/test/github/uscreen/fastify-mongo-auth?targetFile=package.json)
 [![NPM Version](https://badge.fury.io/js/@uscreen.de%2Ffastify-mongo-auth.svg)](https://badge.fury.io/js/@uscreen.de%2Ffastify-mongo-auth)
