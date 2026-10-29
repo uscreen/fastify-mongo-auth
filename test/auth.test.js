@@ -146,7 +146,9 @@ test('fastify-mongo-auth: edges', async (t) => {
 })
 
 test('fastify-mongo-auth: filter', async (t) => {
-  const filter = { disabled: { $ne: true } }
+  const filter = {
+    disabled: { $ne: true }
+  }
 
   const fastify = await build(t, { filter })
   let currentCookie = null
@@ -184,7 +186,9 @@ test('fastify-mongo-auth: filter', async (t) => {
     async () => {
       await fastify.auth.collection.collection.updateOne(
         { username: 'foo' },
-        { $set: { disabled: true } }
+        {
+          $set: { disabled: true }
+        }
       )
 
       const { statusCode } = await fastify.inject({

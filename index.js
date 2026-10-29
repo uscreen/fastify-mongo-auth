@@ -107,7 +107,10 @@ const fastifyMongoAuth = (fastify, opts, next) => {
         ? req.body[usernameField].toLowerCase()
         : req.body[usernameField]
       const account = await auth.collection
-        .findOne({ ...query, ...filter })
+        .findOne({
+          ...query,
+          ...filter
+        })
         .catch((e) => {
           /* istanbul ignore next */
           fastify.log.error(e)
