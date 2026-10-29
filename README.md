@@ -187,6 +187,12 @@ Handler returning the current authenticated account (i.e. called by `GET /curren
 
 ## Changelog
 
+### v2.1.0
+
+#### Changed
+
+- upgrade to env-schema@8.x and fastify-plugin@6.x
+
 ### v2.0.0
 
 #### Changed
