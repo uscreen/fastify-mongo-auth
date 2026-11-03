@@ -35,7 +35,7 @@ importers:
         version: 0.15.0
       '@uscreen.de/fastify-mongo-crud':
         specifier: ^3.0.0
-        version: 3.0.0
+        version: 3.0.1
       '@uscreen.de/id-generator':
         specifier: ^1.0.0
         version: 1.0.0
@@ -139,8 +139,8 @@ packages:
     resolution: {integrity: sha512-qehxGkRj55h/ff8EMaJ+cYhyaKlHIxqYDn682wQD7RNp9UujOQsHog2uS0r2vzr4pW+sXf90NeeayjcNaX3fFg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/parser@7.29.11':
-    resolution: {integrity: sha512-OZ6+oaK7GMyg3IfCpj8JOmn8n+w2rJbDT0LLfVDTLb1ZFeKDh3AiNELgCMUw175IJHSkLl74hG0M0VLsvx+gag==}
+  '@babel/parser@7.29.12':
+    resolution: {integrity: sha512-WJ7JBp/Q4+z/ImydtI7jS6NVco5++632ExBemSX+Ysb+G1lCwQ5BVo3SY+jGGOcZXI4ZccbZSUSJLNBW6eEpJg==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -598,8 +598,8 @@ packages:
     engines: {node: '>=20'}
     hasBin: true
 
-  '@uscreen.de/fastify-mongo-crud@3.0.0':
-    resolution: {integrity: sha512-k1iowsa46ssHU44N2lFB/BPe+Zjro9oe3YHgNdrAE9kYxbF8ZmrKICL1cfP1X3gQQDafRFa4j8Yg1nXo+v3JeQ==}
+  '@uscreen.de/fastify-mongo-crud@3.0.1':
+    resolution: {integrity: sha512-Zwbd6QntzvF8195QEoiI49KLGJwWoL0dFXgGR57TJn2sRFEW50KpqM/qvth1GVI7xxmLgOayiOMSII28tk1r/Q==}
 
   '@uscreen.de/id-generator@1.0.0':
     resolution: {integrity: sha512-HkXqLCu7XgDmNPfDQkVBxYD9kxRgX+Z5ypxhG6VOUqpwbiJo+NnVSbaByO25XAqYPhsG3J2zN+8ls028Q6p/ZQ==}
@@ -1228,9 +1228,6 @@ packages:
 
   fast-wrap-ansi@0.2.2:
     resolution: {integrity: sha512-7F2Fl+TjRSenLqlU3UjSH0iyqopqoZIu7eZVpEirP2g1GtWa2G/ecEmBdgz31+Mxr+ELclgg6sokpSFIQiZ02Q==}
-
-  fastify-plugin@5.1.0:
-    resolution: {integrity: sha512-FAIDA8eovSt5qcDgcBvDuX/v0Cjz0ohGhENZ/wpc3y+oZCY2afZ9Baqql3g/lC+OHRnciQol4ww7tuthOb9idw==}
 
   fastify-plugin@6.0.1:
     resolution: {integrity: sha512-4wW4RxSmvPXLrh5mgQEiu43qU3bw44N2ss4FTkTkQIbprUhE+/s43QX0j/ttcztdWK7PEkHqVthdc5GdEGDvjA==}
@@ -2303,7 +2300,7 @@ snapshots:
 
   '@babel/helper-validator-identifier@7.29.7': {}
 
-  '@babel/parser@7.29.11':
+  '@babel/parser@7.29.12':
     dependencies:
       '@babel/types': 7.29.11
 
@@ -2773,10 +2770,10 @@ snapshots:
       read-pkg: 10.1.0
       yaml: 2.9.1
 
-  '@uscreen.de/fastify-mongo-crud@3.0.0':
+  '@uscreen.de/fastify-mongo-crud@3.0.1':
     dependencies:
       '@fastify/mongodb': 10.0.2
-      fastify-plugin: 5.1.0
+      fastify-plugin: 6.0.1
     transitivePeerDependencies:
       - '@aws-sdk/credential-providers'
       - '@mongodb-js/zstd'
@@ -2803,7 +2800,7 @@ snapshots:
 
   '@vue/compiler-core@3.5.29':
     dependencies:
-      '@babel/parser': 7.29.11
+      '@babel/parser': 7.29.12
       '@vue/shared': 3.5.29
       entities: 7.0.1
       estree-walker: 2.0.2
@@ -2816,7 +2813,7 @@ snapshots:
 
   '@vue/compiler-sfc@3.5.29':
     dependencies:
-      '@babel/parser': 7.29.11
+      '@babel/parser': 7.29.12
       '@vue/compiler-core': 3.5.29
       '@vue/compiler-dom': 3.5.29
       '@vue/compiler-ssr': 3.5.29
@@ -3445,8 +3442,6 @@ snapshots:
   fast-wrap-ansi@0.2.2:
     dependencies:
       fast-string-width: 3.0.2
-
-  fastify-plugin@5.1.0: {}
 
   fastify-plugin@6.0.1: {}
 
