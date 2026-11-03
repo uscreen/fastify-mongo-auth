@@ -35,7 +35,7 @@ importers:
         version: 0.15.0
       '@uscreen.de/fastify-mongo-crud':
         specifier: ^3.0.0
-        version: 3.0.0
+        version: 3.0.1
       '@uscreen.de/id-generator':
         specifier: ^1.0.0
         version: 1.0.0
@@ -598,8 +598,8 @@ packages:
     engines: {node: '>=20'}
     hasBin: true
 
-  '@uscreen.de/fastify-mongo-crud@3.0.0':
-    resolution: {integrity: sha512-k1iowsa46ssHU44N2lFB/BPe+Zjro9oe3YHgNdrAE9kYxbF8ZmrKICL1cfP1X3gQQDafRFa4j8Yg1nXo+v3JeQ==}
+  '@uscreen.de/fastify-mongo-crud@3.0.1':
+    resolution: {integrity: sha512-Zwbd6QntzvF8195QEoiI49KLGJwWoL0dFXgGR57TJn2sRFEW50KpqM/qvth1GVI7xxmLgOayiOMSII28tk1r/Q==}
 
   '@uscreen.de/id-generator@1.0.0':
     resolution: {integrity: sha512-HkXqLCu7XgDmNPfDQkVBxYD9kxRgX+Z5ypxhG6VOUqpwbiJo+NnVSbaByO25XAqYPhsG3J2zN+8ls028Q6p/ZQ==}
@@ -1228,9 +1228,6 @@ packages:
 
   fast-wrap-ansi@0.2.2:
     resolution: {integrity: sha512-7F2Fl+TjRSenLqlU3UjSH0iyqopqoZIu7eZVpEirP2g1GtWa2G/ecEmBdgz31+Mxr+ELclgg6sokpSFIQiZ02Q==}
-
-  fastify-plugin@5.1.0:
-    resolution: {integrity: sha512-FAIDA8eovSt5qcDgcBvDuX/v0Cjz0ohGhENZ/wpc3y+oZCY2afZ9Baqql3g/lC+OHRnciQol4ww7tuthOb9idw==}
 
   fastify-plugin@6.0.1:
     resolution: {integrity: sha512-4wW4RxSmvPXLrh5mgQEiu43qU3bw44N2ss4FTkTkQIbprUhE+/s43QX0j/ttcztdWK7PEkHqVthdc5GdEGDvjA==}
@@ -2773,10 +2770,10 @@ snapshots:
       read-pkg: 10.1.0
       yaml: 2.9.1
 
-  '@uscreen.de/fastify-mongo-crud@3.0.0':
+  '@uscreen.de/fastify-mongo-crud@3.0.1':
     dependencies:
       '@fastify/mongodb': 10.0.2
-      fastify-plugin: 5.1.0
+      fastify-plugin: 6.0.1
     transitivePeerDependencies:
       - '@aws-sdk/credential-providers'
       - '@mongodb-js/zstd'
@@ -3445,8 +3442,6 @@ snapshots:
   fast-wrap-ansi@0.2.2:
     dependencies:
       fast-string-width: 3.0.2
-
-  fastify-plugin@5.1.0: {}
 
   fastify-plugin@6.0.1: {}
 
