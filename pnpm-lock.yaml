@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@fastify/secure-session':
         specifier: ^8.4.1
-        version: 8.4.1(bare-events@2.9.2)(bare-url@2.2.2)
+        version: 8.4.2(bare-events@2.9.2)(bare-url@2.2.2)
       env-schema:
         specifier: ^8.0.1
         version: 8.0.1
@@ -295,8 +295,8 @@ packages:
   '@fastify/proxy-addr@5.1.2':
     resolution: {integrity: sha512-uqB4QsgVoro0XDC+DIftIMGXHdBPn+lK6Ek3xXAIxPMCJfqxnbtyEoMCm2KPUVOuIosd7Cyw9HawEqMFM/UA+g==}
 
-  '@fastify/secure-session@8.4.1':
-    resolution: {integrity: sha512-V9khuSlcbpupL3ZVKvAsnPtxFWDj41946W17vmRYvL4Ov57lh7ZVyYYioB4SYNf7xdV8qa+ZRQ86Ni9sBE2oQQ==}
+  '@fastify/secure-session@8.4.2':
+    resolution: {integrity: sha512-qPOwhnHhKxrWE/p8lYuB/UZRuZMo7HXOJ6tSGD5fMkyTNrCbuljJHVRibIpTshMKeWwwFxistDtLj/R7+G++6Q==}
     hasBin: true
 
   '@fastify/sensible@6.0.7':
@@ -701,8 +701,8 @@ packages:
     resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
     engines: {node: 18 || 20 || >=22}
 
-  bare-addon-resolve@1.11.0:
-    resolution: {integrity: sha512-bTUBSqBjzQQzo2/iIk6KxAClZfahy38EPsJV2bPJ+p2+kS8h+hT5TE5QggpkFUrCnLL4HDTA4DDM+YiNdyol0w==}
+  bare-addon-resolve@1.11.1:
+    resolution: {integrity: sha512-vAZKUjpxX6cHFSFeOGVwf6TLeQCvDkzui4BE1NViPXVDQuodd5dW+GNSqZL7elw0Ks2XKZRiTPTBlFUKeedQKQ==}
     peerDependencies:
       bare-url: '*'
     peerDependenciesMeta:
@@ -866,8 +866,8 @@ packages:
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
 
-  cookie@2.0.1:
-    resolution: {integrity: sha512-yuToqVvRrj6pfDXREyQAAv8SkAEk/8GS3jQRTiUMm66TVtBYmqQeoEjL2Lmq8Rpo6271vH76InTChTitEAm65w==}
+  cookie@2.0.2:
+    resolution: {integrity: sha512-SL0cVuEdETEp7pN0FuZb01toc3vnODEfVUCooxG1SJN0yIirh7JMb9X9bvfCFf0vzzbT68RdbKDHYTiWy7a7iw==}
     engines: {node: '>=22'}
 
   cookie@2.0.2:
@@ -2466,7 +2466,7 @@ snapshots:
 
   '@fastify/cookie@11.1.5':
     dependencies:
-      cookie: 2.0.1
+      cookie: 2.0.2
       fastify-plugin: 6.0.1
 
   '@fastify/deepmerge@3.2.4': {}
@@ -2501,7 +2501,7 @@ snapshots:
       '@fastify/forwarded': 3.1.2
       ipaddr.js: 2.5.0
 
-  '@fastify/secure-session@8.4.1(bare-events@2.9.2)(bare-url@2.2.2)':
+  '@fastify/secure-session@8.4.2(bare-events@2.9.2)(bare-url@2.2.2)':
     dependencies:
       '@fastify/cookie': 11.1.5
       fastify-plugin: 6.0.1
@@ -2881,7 +2881,7 @@ snapshots:
 
   balanced-match@4.0.4: {}
 
-  bare-addon-resolve@1.11.0(bare-url@2.2.2):
+  bare-addon-resolve@1.11.1(bare-url@2.2.2):
     dependencies:
       bare-module-resolve: 1.12.6(bare-url@2.2.2)
       bare-semver: 1.1.0
@@ -3026,7 +3026,7 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  cookie@2.0.1: {}
+  cookie@2.0.2: {}
 
   cookie@2.0.2: {}
 
@@ -4285,7 +4285,7 @@ snapshots:
 
   require-addon@1.3.0(bare-url@2.2.2):
     dependencies:
-      bare-addon-resolve: 1.11.0(bare-url@2.2.2)
+      bare-addon-resolve: 1.11.1(bare-url@2.2.2)
     transitivePeerDependencies:
       - bare-url
 
