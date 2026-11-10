@@ -31,8 +31,8 @@ importers:
         specifier: ^6.0.7
         version: 6.0.7
       '@uscreen.de/dev-service':
-        specifier: ^0.15.0
-        version: 0.15.0
+        specifier: ^0.16.0
+        version: 0.16.0
       '@uscreen.de/fastify-mongo-crud':
         specifier: ^3.0.0
         version: 3.0.1
@@ -131,16 +131,16 @@ packages:
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/helper-string-parser@7.29.11':
-    resolution: {integrity: sha512-snZbO7MEDOof+hvNa97EjEY7qD7h2kwvQr5AJC3ZhQudKW5dnej6k3kP9NQV88hJwaS8vDqRLFo9rivLEhle2g==}
+  '@babel/helper-string-parser@7.29.13':
+    resolution: {integrity: sha512-fWegr+WsEsiMVW4KUNdIIzzMTZSzNiqhy0//6+2MRi2d5NFNsL/AYwBQW8eBnRbTBVRnDVzjaJEUqKaCWjMMdQ==}
     engines: {node: '>=6.9.0'}
 
   '@babel/helper-validator-identifier@7.29.7':
     resolution: {integrity: sha512-qehxGkRj55h/ff8EMaJ+cYhyaKlHIxqYDn682wQD7RNp9UujOQsHog2uS0r2vzr4pW+sXf90NeeayjcNaX3fFg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/parser@7.29.12':
-    resolution: {integrity: sha512-WJ7JBp/Q4+z/ImydtI7jS6NVco5++632ExBemSX+Ysb+G1lCwQ5BVo3SY+jGGOcZXI4ZccbZSUSJLNBW6eEpJg==}
+  '@babel/parser@7.29.13':
+    resolution: {integrity: sha512-fJM50YYjlTiBhgdkGmC1tBpv+FMAyo4annf2X6Aks+0yRlaiVkYW/3f07xAfVVkYIoZ9fFZp+mEThUFnuybhkQ==}
     engines: {node: '>=6.0.0'}
     hasBin: true
 
@@ -593,8 +593,8 @@ packages:
     resolution: {integrity: sha512-SB8xqipSzZHUePCCLNeYxqnxq83X61/qzNhjQGbTfjxGZIeOEP7tBgWYX05Tcd6CgE02WdTJnh5b8kMZJ/+bnQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@uscreen.de/dev-service@0.15.0':
-    resolution: {integrity: sha512-azSkecEquWrujOsx7VVBhMtSEqAKOQyqqzKqRkjba7DIJb2C2ILMxNyfqNEF+4WZxiHQHzQUGT3g+57mRiVa/A==}
+  '@uscreen.de/dev-service@0.16.0':
+    resolution: {integrity: sha512-DqvYHQBZP0cDiinZ7NkIBdLQHRJ2ZtxUy7kVDyg9c5OM16G8IiCcT8hxLeFbgYPOFVvsl5q5wMZPgKtnzstDew==}
     engines: {node: '>=20'}
     hasBin: true
 
@@ -833,8 +833,8 @@ packages:
     resolution: {integrity: sha512-k7ndgKhwoQveBL+/1tqGJYNz097I7WOvwbmmU2AR5+magtbjPWQTS1C5vzGkBC8Ym8UWRzfKUzUUqFLypY4Q+w==}
     engines: {node: '>=20'}
 
-  commander@15.0.0:
-    resolution: {integrity: sha512-z67u4ZhzCL/Tydu1lJARtEZYWbWaN7oYLHbsuzocr6y4N6WZAagG3RQ4FW61V1/0+jImpj293XfrcYnd1qxtPg==}
+  commander@15.1.0:
+    resolution: {integrity: sha512-cgnQ88TRrWcC7pVq46RzJVRMktu3W2RcbnoidnfBsl1bmDCBwJS/udcIZpKoCrbAYYaCqsz1yZCVIgbIaU3ddQ==}
     engines: {node: '>=22.12.0'}
 
   commander@8.3.0:
@@ -1926,6 +1926,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  semver@7.8.6:
+    resolution: {integrity: sha512-9lpSSU4Mly3mrtruwLs1eLK6+gzbzqeBFwRNjIjE+9LuDpWdYctrQlQ3ej1Ilgi7gknpsTRnPoLP8DpCHqHIJw==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   set-cookie-parser@3.2.1:
     resolution: {integrity: sha512-Npd1Pt+4zb3BrSZDPd2qFwRpS6b1EUEasRrO8xS0zMJi0fApXXK5YuzP0minyJnxwnFHoVoJwA55q0A0cu63gQ==}
 
@@ -2296,17 +2301,17 @@ snapshots:
       js-tokens: 4.0.0
       picocolors: 1.1.1
 
-  '@babel/helper-string-parser@7.29.11': {}
+  '@babel/helper-string-parser@7.29.13': {}
 
   '@babel/helper-validator-identifier@7.29.7': {}
 
-  '@babel/parser@7.29.12':
+  '@babel/parser@7.29.13':
     dependencies:
       '@babel/types': 7.29.11
 
   '@babel/types@7.29.11':
     dependencies:
-      '@babel/helper-string-parser': 7.29.11
+      '@babel/helper-string-parser': 7.29.13
       '@babel/helper-validator-identifier': 7.29.7
 
   '@bcoe/v8-coverage@1.0.2': {}
@@ -2737,7 +2742,7 @@ snapshots:
       '@typescript-eslint/visitor-keys': 8.72.1
       debug: 4.4.3
       minimatch: 10.2.6
-      semver: 7.8.5
+      semver: 7.8.6
       tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@5.9.3)
       typescript: 5.9.3
@@ -2760,10 +2765,10 @@ snapshots:
       '@typescript-eslint/types': 8.72.1
       eslint-visitor-keys: 5.0.1
 
-  '@uscreen.de/dev-service@0.15.0':
+  '@uscreen.de/dev-service@0.16.0':
     dependencies:
       chalk: 6.0.1
-      commander: 15.0.0
+      commander: 15.1.0
       fs-extra: 11.4.1
       nanoid: 6.0.2
       parse-json: 8.3.0
@@ -2800,7 +2805,7 @@ snapshots:
 
   '@vue/compiler-core@3.5.29':
     dependencies:
-      '@babel/parser': 7.29.12
+      '@babel/parser': 7.29.13
       '@vue/shared': 3.5.29
       entities: 7.0.1
       estree-walker: 2.0.2
@@ -2813,7 +2818,7 @@ snapshots:
 
   '@vue/compiler-sfc@3.5.29':
     dependencies:
-      '@babel/parser': 7.29.12
+      '@babel/parser': 7.29.13
       '@vue/compiler-core': 3.5.29
       '@vue/compiler-dom': 3.5.29
       '@vue/compiler-ssr': 3.5.29
@@ -3004,7 +3009,7 @@ snapshots:
       strip-ansi: 7.2.0
       wrap-ansi: 9.0.2
 
-  commander@15.0.0: {}
+  commander@15.1.0: {}
 
   commander@8.3.0: {}
 
@@ -3086,7 +3091,7 @@ snapshots:
   eslint-compat-utils@0.5.1(eslint@10.14.0):
     dependencies:
       eslint: 10.14.0
-      semver: 7.8.5
+      semver: 7.8.6
 
   eslint-config-flat-gitignore@2.4.0(eslint@10.14.0):
     dependencies:
@@ -4094,7 +4099,7 @@ snapshots:
   normalize-package-data@8.0.0:
     dependencies:
       hosted-git-info: 9.0.3
-      semver: 7.8.5
+      semver: 7.8.6
       validate-npm-package-license: 3.0.4
 
   nth-check@2.1.1:
@@ -4315,6 +4320,8 @@ snapshots:
       sodium-native: 3.4.1
 
   semver@7.8.5: {}
+
+  semver@7.8.6: {}
 
   set-cookie-parser@3.2.1: {}
 
